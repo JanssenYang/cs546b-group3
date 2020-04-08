@@ -10,7 +10,7 @@ const constructorMethod = (app) => {
     app.use('/users', userRoutes);
     app.use('/', (req,res)=>{
         //Home Page without log in
-        res.sendFile(path.resolve('static/index.html'));
+        res.render('home/');
     });
 
 	app.use('*', (req, res) => {
