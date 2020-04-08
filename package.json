@@ -1,0 +1,26 @@
+{
+  "name": "cs546b-group3",
+  "version": "1.0.0",
+  "description": "Schedule Sharing Web Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JanssenYang/cs546b-group3.git"
+  },
+  "author": "Nick Primamore, Conner Zeigman, Liam King, Sen Yang (CS 546 B Group 3)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JanssenYang/cs546b-group3/issues"
+  },
+  "homepage": "https://github.com/JanssenYang/cs546b-group3#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^4.0.3",
+    "handlebars": "^4.7.6",
+    "mongodb": "^3.5.5"
+  }
+}
