@@ -1,21 +1,16 @@
+const userRoute = require('./users')
+const path = require('path')
 
-const eventRoutes = require('./events');
-const userRoutes = require('./users');
-const searchRoutes = require('./search');
-const path = require('path');
+const constructorMethod = app => {
+   app.get('/', (req, res) => {
+        res.render('layouts/login', {
+            title: 'Hello'
+        })
+    })
+    app.use('/users', userRoute)
+    app.use('*', (req, res) => {
+        res.redirect('/')
+    })
+}
 
-const constructorMethod = (app) => {
-    app.use('/search', searchRoutes);
-	app.use('/events', postRoutes);
-    app.use('/users', userRoutes);
-    app.use('/', (req,res)=>{
-        //Home Page without log in
-        res.render('home/');
-    });
-
-	app.use('*', (req, res) => {
-		res.redirect('/');
-	});
-};
-
-module.exports = constructorMethod;
+module.exports = constructorMethod
