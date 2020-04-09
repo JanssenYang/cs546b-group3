@@ -1,0 +1,20 @@
+<h1>Welcome</h1>
+<form action="/users/login" method="post">
+    <label for="userName">Username:</label><br>
+    <input type="text" id="userName" name="userName"><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password"><br><br>
+    <input type="submit" value="Submit">
+</form><br>
+
+{{#if hasErrors}}
+<ul class="error-list">
+    {{#each errors}}
+    <li>
+        {{this}}
+    </li>
+    {{/each}}
+</ul>
+{{/if}}
+
+<a href='/users/new'>Create an account</a>
