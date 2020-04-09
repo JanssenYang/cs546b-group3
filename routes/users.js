@@ -1,3 +1,4 @@
+module.exports = router;
 const express = require('express')
 const router = express.Router();
 const data = require('../data')
@@ -116,4 +117,4 @@ router.get('/:userName', async (req, res) => {
     })
 })
 
-module.exports = router
+module.exports = router;
