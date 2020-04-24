@@ -114,5 +114,42 @@ module.exports = {
         }
 
         return comment;
+    },
+
+    async removeEvent(id){
+        if (!id) throw 'Error: event ID must be provided';
+        if (typeof id !== 'string' && typeof id !== 'object') throw 'Error: event ID must be a string or object ID.'
+        if (typeof id === 'string') {
+            id = ObjectId.createFromHexString(id);
+        }
+
+        const eventCollection = await events();
+        const userCollection = await users();
+
+        const deletedEvent = await this.getEvent(id);
+        const participants = deletedEvent.participants;
+
+        //Delete the event from each participant's event list
+        for(index = 0; index < participants.length; index++){
+            let userID = participants[index];
+            let userObjId = ObjectId.createFromHexString(userID);
+            let user = await userCollection.findOne({_id: userObjId});
+            
+            let eventList = user.events;
+            let ind = eventList.indexOf(id.toString());
+            eventList.splice(ind, 1); //removes the event from the user's event list
+            user.events = eventList; 
+            const updatedInfo = await userCollection.updateOne({_id: user._id}, {$set: user});
+            if (updatedInfo.modifiedCount === 0) {
+                throw 'Error: could not update user successfully';
+            }
+        }
+
+        const deletionInfo = await eventCollection.deleteOne({_id: id});
+        if (deletionInfo.deletedCount === 0) {
+            throw `Error: could not delete event with id of ${id}`;
+        }
+
+        return deletedEvent;
     }
 }
