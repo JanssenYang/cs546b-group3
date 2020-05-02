@@ -23,7 +23,7 @@ module.exports = {
             firstName: firstName,
             lastName: lastName,
             userName: userName,
-            password: password,
+            hashedPassword: password,
             email: email,
             friends: [],
             events: []

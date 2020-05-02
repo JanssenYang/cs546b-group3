@@ -3,6 +3,7 @@ const router = express.Router();
 const data = require('../data')
 const userData = data.users
 const path = require('path')
+const bcrypt = require("bcryptjs");
 
 router.get('/new', async (req, res) => {
     res.render('layouts/register', {
@@ -46,14 +47,22 @@ router.post('/register', async (req, res) => {
         return
     }
 
+    const hash = await bcrypt.hash(userInfo.password, 16);
     try {
         const newUser = await userData.addUser(
             userInfo.firstName,
             userInfo.lastName,
             userInfo.userName,
-            userInfo.password,
+            hash,
             userInfo.email
     )
+
+        //Set the AuthCookie and have it expire in 1 hour
+        req.session.user = newUser;
+        const expiresAt = new Date();
+        expiresAt.setHours(expiresAt.getHours() + 1);
+        req.session.cookie.expires = expiresAt;
+
         res.render('users/profile', {
             title: `${userInfo.userName}'s Account`,
             userName: userInfo.userName
@@ -92,8 +101,16 @@ router.post('/login', async (req, res) => {
     }
 
     try {
-        const getUser =  await userData.getUserByUserName(userInfo.userName)
-        if (getUser !== null && getUser.password === userInfo.password) {
+        const getUser = await userData.getUserByUserName(userInfo.userName)
+        const hashedPassword = getUser.hashedPassword;
+        let match = await bcrypt.compare(userInfo.password, hashedPassword);
+        if (match) {
+            //Set the AuthCookie and have it expire in 1 hour
+            req.session.user = getUser;
+            const expiresAt = new Date();
+            expiresAt.setHours(expiresAt.getHours() + 1);
+            req.session.cookie.expires = expiresAt;
+
             res.redirect(`/users/${userInfo.userName}`)
             return
         } else {
@@ -101,19 +118,64 @@ router.post('/login', async (req, res) => {
         }
     } catch (e) {
         res.render('layouts/login', {
-            title: 'Welcome',
-            errors: [e],
+            title: 'Login',
+            errors: ['Username and/or password incorrect'], //explicitly writing this b/c getUserByUserName() could throw an error itself
             hasErrors: true
         })
     }
 
 })
 
+router.get("/logout", async (req, res) => {
+    let firstName = req.session.user.firstName;
+
+    //Expire the AuthCookie
+    const anHourAgo = new Date();
+    anHourAgo.setHours(anHourAgo.getHours() - 1);
+    req.session.cookie.expires = anHourAgo;
+
+    res.render("layouts/logout", {title: "Logged Out", firstName: firstName});
+});
+
+//This route will be for displaying the user's profile page (event calendar, friends, add event, etc.)
+//It will also be the route for viewing a friend's calendar/profile (if the given userName is a friend of the logged-in user)
 router.get('/:userName', async (req, res) => {
-    res.render('users/profile', {
-        title: 'Your Profile',
-        userName: req.params.userName
-    })
+    //If an non-authenticated user tries to access their profile page
+    if(!req.session.user){
+        res.status(403).render("layouts/error", {title: "403 Error: Not Authenticated", error: "Please login to view your profile."});
+        return;
+    }
+    try{
+        //Possible for this user to not exist, will throw and be caught below
+        const getUser = await userData.getUserByUserName(req.params.userName);
+
+        //If the user is logged in and the userName is not their own, check to see
+        //if the user is friend's with that person. If not, they can't view their profile.
+        if(req.params.userName !== req.session.user.userName){
+            const friendsList = req.session.user.friends;
+            let found = false;
+            for(let index = 0; index < friends.length; index++){
+                if(getUser._id.toString() === friendsList[index]){
+                    //The user can view this person's profile because they are friends
+                    found = true;
+                    break;
+                }
+            }
+            if(found == false){
+                throw "You do not have access view this user's profile (you are not friends with them).";
+            }
+        }
+        //this will be where we get event info from mongo and display in the user's calendar
+        res.render('users/profile', {
+            title: `${req.params.userName}'s Account`,
+            userName: req.params.userName
+        })
+    }catch(e){
+        res.status(404).render("layouts/error", {
+            title: "404 Error: Not Found",
+            error: e 
+        });
+    }
 })
 
 module.exports = router;
