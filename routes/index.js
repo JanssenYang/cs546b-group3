@@ -1,4 +1,5 @@
 const userRoute = require('./users')
+const eventRoute = require('./events')
 const path = require('path')
 
 const constructorMethod = app => {
@@ -14,6 +15,7 @@ const constructorMethod = app => {
         }
     })
     app.use('/users', userRoute)
+    app.use('/events', eventRoute)
     app.use('*', (req, res) => {
         res.sendStatus(404);
     })
