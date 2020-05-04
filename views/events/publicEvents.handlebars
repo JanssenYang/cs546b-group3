@@ -1,0 +1,36 @@
+<h1>Public Events</h1>
+<div id="eventsList">
+    {{#unless empty}}
+    {{#each events}}
+        <h2>Name: {{eventName}}</h2>
+        <p>Date: {{date}}</p>
+        <p>Start Time: {{timeStart}}</p>
+        <p>End Time: {{timeEnd}}</p>
+        <p>Location: {{location}}</p>
+    {{/each}}
+    {{/unless}}
+</div>
+
+<form id="newEventForm">
+    <label>
+        Event Name
+        <input id="eventName" type="text">
+    </label>
+    <label>
+        Location
+        <input id="location" type="text">
+    </label>
+    <label>
+        Date
+        <input id="eventDate" type="date">
+    </label>
+    <label>
+        Start Time
+        <input id="startTime" type="time">
+    </label>
+    <label>
+        End time
+        <input id="endTime" type="time">
+    </label>
+    <input type="submit" value="Submit Event">
+</form>
