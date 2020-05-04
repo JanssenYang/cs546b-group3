@@ -110,7 +110,6 @@ router.post('/login', async (req, res) => {
             const expiresAt = new Date();
             expiresAt.setHours(expiresAt.getHours() + 1);
             req.session.cookie.expires = expiresAt;
-
             res.redirect(`/users/${userInfo.userName}`)
             return
         } else {
