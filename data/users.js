@@ -121,7 +121,7 @@ module.exports = {
         const userCollection = await users();
         const eventCollection = await events();
 
-        const user = await this.getUserByUserName(username);
+        let user = await this.getUserByUserName(username);
         if (typeof eventID === 'string') {
             eventID = ObjectId.createFromHexString(eventID);
         }
@@ -135,6 +135,46 @@ module.exports = {
         //Updating the event's participants list (list of string ID's)
         let participantsList = event.participants;
         participantsList.push(user._id.toString());
+        event.participants = participantsList;
+
+        const updatedUser = await userCollection.updateOne({_id: user._id}, {$set: user});
+        if (updatedUser.modifiedCount === 0) {
+            throw 'Error: could not update user successfully';
+        }
+
+        const updatedEvent = await eventCollection.updateOne({_id: eventID}, {$set: event});
+        if (updatedEvent.modifiedCount === 0) {
+            throw 'Error: could not update event successfully';
+        }
+
+        return user;
+    },
+
+    async leaveEvent(username, eventID){
+        if (!username) throw 'Error: Username must be provided.';
+        if (!eventID) throw 'Error: eventID must be provided.';
+        if (typeof username !== 'string') throw 'Error: username must be a string.';
+        if (typeof eventID !== 'string' && typeof eventID !== 'object') throw 'Error: eventID must be a string or object ID.';
+
+        const userCollection = await users();
+        const eventCollection = await events();
+
+        let user = await this.getUserByUserName(username);
+        if (typeof eventID === 'string') {
+            eventID = ObjectId.createFromHexString(eventID);
+        }
+        const event = await eventCollection.findOne({_id: eventID});
+        //Updating user's events list
+        let eventList = user.events;
+        let index = -1;
+        index = eventList.indexOf(eventID.toString());
+        eventList.splice(index, 1);
+        user.events = eventList;
+
+        //Updating the event's participants list (list of string ID's)
+        let participantsList = event.participants;
+        index = participantsList.indexOf(user._id.toString())
+        participantsList.splice(index, 1);
         event.participants = participantsList;
 
         const updatedUser = await userCollection.updateOne({_id: user._id}, {$set: user});
