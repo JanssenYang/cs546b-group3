@@ -7,6 +7,7 @@ const user_event = document.getElementById("user_event");
 // console.log(user_friend.innerHTML);
 let friend = JSON.parse(user_friend.innerHTML);
 let event = JSON.parse(user_event.innerHTML);
+// console.log(event);
 
 if(article_friend){
     for( let i=0; i<friend.length; i++ ){
@@ -38,8 +39,8 @@ let transFromTimeToArray=(str)=>{
     return str;
 }
 //update month and year every 2 second.
-// setInterval( "updateTime();", 2000 );
-setTimeout( "updateTime();",200 );//for test
+setInterval( "updateTime();", 20 );
+// setTimeout( "updateTime();",200 );//for test
 let cleanTable=()=>{
     let rowLength = table.rows.length;
     for( let i=1; i<rowLength; i++ ){
