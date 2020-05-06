@@ -25,6 +25,15 @@
     {{/each}}
 </ul>
 <a href="/events">Back To Public Events</a>
+<form action="/events/addComment{{event._id}}" method="POST" id="addComment">
+    <label>
+        Add Comment
+        <input name="commentText" id="commentText" type="text">
+    </label>
+    <label>
+        <button type="submit">Submit</button>
+    </label>
+</form>
 <p class="eventInfo">Comments:</p>
 <ol id="commentsList">
     {{#each event.comments}}

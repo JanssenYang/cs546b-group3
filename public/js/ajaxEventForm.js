@@ -13,8 +13,7 @@
         let location = newLocation.val();
         let date = newDate.val();
         let start = newStart.val();
-        let end = newEnd.val();
-        InpForm.trigger("reset");
+        let end = newEnd.val();        
         let anyErrors = false;
         eventErrors.empty();
         if(!date){
@@ -44,6 +43,7 @@
             eventErrors.append("<li>You must input an end time</li>");
         }
         if(!anyErrors){
+            InpForm.trigger("reset");
             let newEvents = $('#eventsList');
             let requestConfig = {
                 method: "POST",
