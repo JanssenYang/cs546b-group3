@@ -1,0 +1,12 @@
+body{
+    background-color:#ffeeff;
+}
+
+td{
+    width: 150pt;
+    height: 50pt;
+}
+
+.td_title{
+    height: 20pt;
+}
