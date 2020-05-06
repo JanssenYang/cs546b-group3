@@ -1,0 +1,35 @@
+<h1>{{{title}}}</h1>
+<br>
+<article id="user_friendList">
+    <p>Friends:</p>
+    <p id="user_friend" hidden >{{{friend}}}</p>
+</article>
+<br>
+<p id="user_event" hidden>{{{event}}}</p>
+ <form name="f">
+    <label for="">
+      Please select the month: <input type="number" id="month" value="5">
+    </label>
+    <label for="">
+      Please select the year: <input type="number" id="year" value="2020">
+    </label>
+ </form>
+<article>
+    <p id="month_error" hidden >The month is not valid.</p>
+    <p id="year_error" hidden >The month is not valid.</p>
+</article>
+<br>
+  <table id="schedule">
+      <tr>
+        <td class="td_title">SUNDAY</td>
+        <TD class="td_title">MONDAY</TD>
+        <TD  class="td_title">TUESDAY</TD>
+        <TD class="td_title">WEDNESDAY</TD>
+        <TD class="td_title">THURSDAY</TD>
+        <TD class="td_title">FRIDAY</TD>
+        <TD class="td_title">SATURDAY</TD>
+      </tr>
+  </table>
+
+
+  <script src="../../public/js/userInfomation.js">  </script>
