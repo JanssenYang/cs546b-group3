@@ -17,7 +17,7 @@ app.use(
 		name: "AuthCookie",
 		secret: "some secret string!",
 		saveUninitialized: true,
-		resave: false
+		resave: false,
 	})
 );
 
@@ -37,6 +37,15 @@ app.use("/users/logout", (req, res, next) => {
 		res.render("layouts/login", {title: "Login", hasErrors: false});
     }
     else{
+		next();
+	}
+});
+
+app.use("/events", (req, res, next) => { //check specific events too
+	if(!req.session.user){
+		res.redirect("/");
+	}
+	else{
 		next();
 	}
 });
