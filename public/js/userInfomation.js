@@ -4,7 +4,7 @@ const user_friend = document.getElementById("user_friend");
 const user_event = document.getElementById("user_event");
 
 // console.log(typeof user_friend.innerHTML);
-console.log(user_friend.innerHTML);
+// console.log(user_friend.innerHTML);
 let friend = JSON.parse(user_friend.innerHTML);
 let event = JSON.parse(user_event.innerHTML);
 
@@ -18,18 +18,18 @@ if(article_friend){
 }
 
 const table = document.getElementById("schedule");
-let month=0, year=0;
+let month=0, year=0,day=0;
 setTimeout("transEventDateToArray()",10);
 let transEventDateToArray=()=>{
     for(let i=0; i<event.length; i++){
         let str = event[i].eventdate;
         event[i].eventdate = transFromTimeToArray(str);
-        console.log(event[i]);
+        // console.log(event[i]);
     }
 }
 
 let transFromTimeToArray=(str)=>{
-    console.log(str);
+    // console.log(str);
     let arr = str.split("T");
     str = arr[0].split("-");
     for(let j=0; j<str.length; j++){
@@ -38,28 +38,97 @@ let transFromTimeToArray=(str)=>{
     return str;
 }
 //update month and year every 2 second.
-setInterval( "updateTime();", 20 );
-// setTimeout( "updateTime();",200 );//for test
+// setInterval( "updateTime();", 2000 );
+setTimeout( "updateTime();",200 );//for test
 let cleanTable=()=>{
     let rowLength = table.rows.length;
     for( let i=1; i<rowLength; i++ ){
         table.deleteRow(1);
     }
-    // console.log(table);
 }
+const view = document.getElementsByName('view');
 let updateTime=()=>{
-    // console.log(month)
-    month = document.f.month.value;
-    year = document.f.year.value;
+    // month = document.f.month.value;
+    // year = document.f.year.value;
+    let date = document.f.select_date.value;
+    // console.log(typeof date);
+    // console.log("aaa"+date+"aaa");
+    if(!date) return;
+    let arr = date.split('-');
+    month = parseInt(arr[1]);
+    year =  parseInt(arr[0]);
+    day =  parseInt(arr[2]);
+    // console.log(month+" "+day+" "+year);
     let error=null;
     if( isNaN(month) || month<1 || month>12 ){
         error = "Error: month is not valid.";
     }
     if( isNaN(year) || year<1970 ){
         error= "Error: year is not valid.";
-        return;
     }
+    if( isNaN(day) || day<1 || day >31  ){
+        error= "Error: day is not valid.";
+    }
+    if( error ){console.log(error); return;}
     cleanTable();
+    //select monthly or weekly
+    let mark=0;
+    for( let i=0; i<view.length; i++ ){
+        if(view[i].checked){
+            mark = view[i].value;
+            break;
+        }
+    }
+    if( !mark ) return;
+    else if(mark ==1) updateTimeMonthly();
+    else if( mark == 2 ) updateTimeWeekly();
+}
+let updateTimeWeekly=()=>{
+    let selectDate = new Date(""+month+" "+day+","+year);
+    // console.log(selectDate);
+    let w = selectDate.getDay();
+    // console.log(w);
+    // let startDate = new Date(""+month+" "+(day-w)+","+year);
+    let startDate = new Date(selectDate);
+    startDate.setDate(startDate.getDate()-w);
+    // let endDate = new Date(""+month+" "+(day+6-w)+","+year);
+    let endDate = new Date(selectDate);
+    endDate.setDate( endDate.getDate()+(6-w) );
+    let titleRow = document.createElement('tr');
+    let contentRow=document.createElement('tr');
+    let temp = new Date(startDate);
+    for(let i=0; i<7; i++){
+        let td = document.createElement('td');
+        td.innerHTML = (temp.getMonth()+1)+"/"+temp.getDate();
+        td.className = 'td_title';
+        titleRow.appendChild(td);
+        let td2 = document.createElement('td');
+        // td2.innerHTML = temp.getDate();
+        let y = parseInt(temp.getFullYear()), m =parseInt( temp.getMonth())+1, d=parseInt(temp.getDate());
+        // console.log( y+" "+m+" "+d );
+        for( let j=0; j<event.length; j++ ){
+            let date = event[j].eventdate;
+            // console.log(date);
+            if( date[0] == y ){
+                if( date[1] == m ){
+                    if( date[2] == d ){
+                        let alink = document.createElement('a');
+                        alink.innerHTML = event[j].eventName;
+                        alink.href = "http://localhost:3000/events/"+event[j].eventId;
+                        let br = document.createElement('br');
+                        td2.appendChild(br);
+                        td2.appendChild(alink);
+                    }
+                }
+            }
+        }
+        contentRow.appendChild(td2);
+        temp.setDate(temp.getDate()+1);
+    }
+    table.appendChild(titleRow);
+    table.appendChild(contentRow);
+}
+let updateTimeMonthly=()=>{
     let now = new Date(""+month+" 01,"+year);
     // console.log(now);
     // console.log("year="+year+"month="+month);

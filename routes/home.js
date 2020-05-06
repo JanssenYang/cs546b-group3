@@ -19,7 +19,7 @@ router.get('/', async (req, res)=>{
             friend: JSON.stringify(friendNameAndLink),
             event: JSON.stringify(eventNameAndTime)
         };
-        res.render('home/logged', obj);
+        res.render('home/normal', obj);
     }catch(e){
         res.status(404).render("layouts/error", {
             title: "404 Error: Not Found",

@@ -7,11 +7,21 @@
 <br>
 <p id="user_event" hidden>{{{event}}}</p>
  <form name="f">
-    <label for="">
-      Please select the month: <input type="number" id="month" value="5">
+   <label for="">
+      Please select the date: <input type="date" id="select_date" value="2020-05-05" >
+    </label>
+    {{!-- <label for="">
+      Please select the month: <input type="number" id="month" value="5" >
     </label>
     <label for="">
-      Please select the year: <input type="number" id="year" value="2020">
+      and the year: <input type="number" id="year" value="2020">
+    </label> --}}
+    <br><p>Please select a viewing</p>
+    <label for="">
+        <input type="radio" name="view" value="1" > Monthly
+    </label>
+    <label for="">
+        <input type="radio" name="view" value="2"checked="checked"> Weekly
     </label>
  </form>
 <article>
@@ -19,11 +29,11 @@
     <p id="year_error" hidden >The month is not valid.</p>
 </article>
 <br>
-  <table id="schedule">
+  <table id="schedule" border="1">
       <tr>
         <td class="td_title">SUNDAY</td>
         <TD class="td_title">MONDAY</TD>
-        <TD  class="td_title">TUESDAY</TD>
+        <TD class="td_title">TUESDAY</TD>
         <TD class="td_title">WEDNESDAY</TD>
         <TD class="td_title">THURSDAY</TD>
         <TD class="td_title">FRIDAY</TD>
