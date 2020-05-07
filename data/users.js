@@ -29,9 +29,33 @@ module.exports = {
             events: []
         };
 
+        //Username provided is the same spelling and case as an existing username. Reject it
         const checkId = await userCollection.findOne({ userName: userName})
         if (checkId !== null) throw 'Error: Username already in use.' 
 
+        //Email provided is the same spelling and case as an existing email. Reject it
+        const checkId2 = await userCollection.findOne({ email: email});
+        if (checkId2 !== null) throw 'Error: Email already in use.' 
+
+        //Check to see if the username and email provided are the same spelling as existing 
+        //usernames and emails, but different case. Reject them if they are
+        const usersArray = await this.getAllUsers();
+        for(let index = 0; index < usersArray.length; index++){
+            let username2 = usersArray[index].userName;
+            let email2 = usersArray[index].email;
+
+            //Username case sensitivity check
+            if(userName.toLowerCase() === username2.toLowerCase()){
+                throw 'Error: Username already in use.';
+            }
+
+            //Email case sensitivity check
+            if(email.toLowerCase() === email2.toLowerCase()){
+                throw 'Error: Email already in use.';
+            }
+        }
+
+        //At this point, the user has valid credentials and can create an account
         const insertUser = await userCollection.insertOne(newUser)
         if (insertUser.insertedCount === 0) throw 'Error: Failed to insert user.'
 
