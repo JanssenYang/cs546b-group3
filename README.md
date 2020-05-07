@@ -3,6 +3,8 @@
 CS-546-B Group 3:
 Nick Primamore, Conner Zeigman, Liam King, Sen Yang
 
+Github Link: https://github.com/JanssenYang/cs546b-group3
+
 A scheduling application with a social media twist. Users of our app can add events to their schedules, as well as add friends. When friends with someone, the user will be able to view that friend’s public events, as well as comment on each other’s events. If a user would like to attend a friend’s event, there will be a button for the user to press that will add the event to their personal schedule. When an event is clicked on, it will show all details about the event, including comments. The public events page is a community page for our app, where any user can view/add events, comment on events, or even add these public events to their personal schedule. Comments will be visible to all users attending the same event.
 
 “npm seed” can be run to populate the database. We’ve added multiple users and friends, personal events for each user, as well as public events on the public events page. There are also comments on some of the events.
