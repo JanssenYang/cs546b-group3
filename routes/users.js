@@ -4,6 +4,7 @@ const data = require('../data')
 const userData = data.users
 const path = require('path')
 const bcrypt = require("bcryptjs");
+const xss = require("xss");
 
 router.get('/new', async (req, res) => {
     res.render('layouts/register', {
@@ -18,23 +19,23 @@ router.post('/register', async (req, res) => {
     let userInfo = req.body
     let errors = []
 
-    if (!userInfo.firstName) {
+    if (!xss(userInfo.firstName)) {
         errors.push('First name not provided')
     }
 
-    if (!userInfo.lastName) {
+    if (!xss(userInfo.lastName)) {
         errors.push('Last name not provided')
     }
 
-    if(!userInfo.userName) {
+    if(!xss(userInfo.userName)) {
         errors.push('Username not provided')
     }
 
-    if(!userInfo.password) {
+    if(!xss(userInfo.password)) {
         errors.push('Password not provided')
     }
 
-    if(!userInfo.email) {
+    if(!xss(userInfo.email)) {
         errors.push('Email not provided')
     }
 
@@ -47,14 +48,14 @@ router.post('/register', async (req, res) => {
         return
     }
 
-    const hash = await bcrypt.hash(userInfo.password, 16);
+    const hash = await bcrypt.hash(xss(userInfo.password), 16);
     try {
         const newUser = await userData.addUser(
-            userInfo.firstName,
-            userInfo.lastName,
-            userInfo.userName,
+            xss(userInfo.firstName),
+            xss(userInfo.lastName),
+            xss(userInfo.userName),
             hash,
-            userInfo.email
+            xss(userInfo.email)
     )
 
         //Set the AuthCookie and have it expire in 1 hour
@@ -64,8 +65,8 @@ router.post('/register', async (req, res) => {
         req.session.cookie.expires = expiresAt;
 
         res.render('users/profile', {
-            title: `${userInfo.userName}'s Account`,
-            userName: userInfo.userName
+            title: `${xss(userInfo.userName)}'s Account`,
+            userName: xss(userInfo.userName)
         })
         return
     } catch (e) {
@@ -83,11 +84,11 @@ router.post('/login', async (req, res) => {
     let userInfo = req.body
     let errors = []
 
-    if (!userInfo.userName) {
+    if (!xss(userInfo.userName)) {
         errors.push('Username not provided')
     }
 
-    if (!userInfo.password) {
+    if (!xss(userInfo.password)) {
         errors.push('Password not provided')
     }
 
@@ -101,16 +102,17 @@ router.post('/login', async (req, res) => {
     }
 
     try {
-        const getUser = await userData.getUserByUserName(userInfo.userName)
+        //Note: username is case sensitive
+        const getUser = await userData.getUserByUserName(xss(userInfo.userName))
         const hashedPassword = getUser.hashedPassword;
-        let match = await bcrypt.compare(userInfo.password, hashedPassword);
+        let match = await bcrypt.compare(xss(userInfo.password), hashedPassword);
         if (match) {
             //Set the AuthCookie and have it expire in 1 hour
             req.session.user = getUser;
             const expiresAt = new Date();
             expiresAt.setHours(expiresAt.getHours() + 1);
             req.session.cookie.expires = expiresAt;
-            res.redirect(`/users/${userInfo.userName}`)
+            res.redirect(`/users/${xss(userInfo.userName)}`)
             return
         } else {
             throw 'Username and/or password incorrect'
