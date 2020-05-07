@@ -50,6 +50,15 @@ app.use("/events", (req, res, next) => { //check specific events too
 	}
 });
 
+app.use("/search", (req, res, next) => {
+	if(!req.session.user){
+		res.redirect("/");
+	}
+	else{
+		next();
+	}
+});
+
 configRoutes(app);
 
 app.listen(3000, () => {
