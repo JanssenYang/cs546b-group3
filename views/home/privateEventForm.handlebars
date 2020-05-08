@@ -1,0 +1,34 @@
+<h1>Add a New Private Event</h1>
+<form method="POST" action="/home/newEvent" id="privateNewEventForm">
+    <label>
+        Event Name
+        <input name="privateEventName" type="text">
+    </label>
+    <label>
+        Location
+        <input name="privateLocation" type="text">
+    </label>
+    <label>
+        Date
+        <input name="privateEventDate" type="date">
+    </label>
+    <label>
+        Start Time
+        <input name="privateStartTime" type="time">
+    </label>
+    <label>
+        End time
+        <input name="privateEndTime" type="time">
+    </label>
+    <input type="submit" value="Submit Event">
+</form>
+
+{{#if anyErrors}}
+<ul class="error-list">
+    {{#each errors}}
+    <li>
+        {{this}}
+    </li>
+    {{/each}}
+</ul>
+{{/if}}
