@@ -155,7 +155,7 @@ router.get('/:userName', async (req, res) => {
         if(req.params.userName !== req.session.user.userName){
             const friendsList = req.session.user.friends;
             let found = false;
-            for(let index = 0; index < friends.length; index++){
+            for(let index = 0; index < friendsList.length; index++){
                 if(getUser._id.toString() === friendsList[index]){
                     //The user can view this person's profile because they are friends
                     found = true;

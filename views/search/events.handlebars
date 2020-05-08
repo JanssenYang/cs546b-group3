@@ -1,0 +1,29 @@
+<h1>Search Events</h1>
+<main>
+    <form action="/search" method="post" id = "searchForm">
+        <select id = 'eventSearchParameter' name = 'eventSearchParameter'>
+            <option value="location">Location</option>
+            <option value="date">Date</option>
+            <option value="eventName">Name</option>
+        </select>
+        <br>
+        <br>
+        <input type="text" id="searchInput" name="searchInput" class="searchInput">
+        <input type="submit" id="Submit" value="Submit">
+    </form>
+    <br>
+    <a href = '/search/searchFriends'>Search Friends</a><br>
+    <a href = '/search/addFriends'>Add friends</a>
+</main>
+
+{{#if hasErrors}}
+  <ul class="error-list">
+    {{#each errors}}
+    <li>
+      {{this}}
+    </li>
+    {{/each}}
+  </ul>
+{{/if}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src = "/search/js/searchFormUpdate.js"></script>
