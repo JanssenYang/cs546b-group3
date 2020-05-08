@@ -41,7 +41,7 @@ router.get('/', async (req, res)=>{
 
         let obj={
             title: `${user.userName}'s Home`,
-            // userName: user.userName,
+            userName: user.userName,
             friend: JSON.stringify(friendNameAndLink),
             event: JSON.stringify(eventNameAndTime)
         };

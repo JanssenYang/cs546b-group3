@@ -1,5 +1,45 @@
   <h1>Welcome to your profile, {{{userName}}}</h1>
+<br>
+<article id="user_friendList">
+    <p>Friends:</p>
+    <p id="user_friend" hidden >{{{friend}}}</p>
+</article>
+<br>
+<p id="user_event" hidden>{{{event}}}</p>
+ <form name="f">
+   <label for="">
+      Please select the date: <input type="date" id="select_date" value="2020-05-05" >
+    </label>
+    {{!-- <label for="">
+      Please select the month: <input type="number" id="month" value="5" >
+    </label>
+    <label for="">
+      and the year: <input type="number" id="year" value="2020">
+    </label> --}}
+    <br><p>Please select a viewing</p>
+    <label for="">
+        <input type="radio" name="view" value="1" > Monthly
+    </label>
+    <label for="">
+        <input type="radio" name="view" value="2"checked="checked"> Weekly
+    </label>
+ </form>
+<article>
+    <p id="month_error" hidden >The month is not valid.</p>
+    <p id="year_error" hidden >The month is not valid.</p>
+</article>
+<br>
+  <table id="schedule" border="1">
+      <tr>
+        <td class="td_title">SUNDAY</td>
+        <TD class="td_title">MONDAY</TD>
+        <TD class="td_title">TUESDAY</TD>
+        <TD class="td_title">WEDNESDAY</TD>
+        <TD class="td_title">THURSDAY</TD>
+        <TD class="td_title">FRIDAY</TD>
+        <TD class="td_title">SATURDAY</TD>
+      </tr>
+  </table>
 
 
-  <p>Hello.</p>
-  <a href="http://localhost:3000/home">Main Page</a>
+  <script src="../../public/js/userInfomation.js">  </script>
