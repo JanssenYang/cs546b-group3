@@ -171,7 +171,9 @@ router.get('/:userName', async (req, res) => {
         let friendNameAndLink=[];
         let eventNameAndTime=[];
 
-        let friend = getUser.friend;
+        let friend = getUser.friends;
+        // console.log("in users/id friends:");
+        // console.log(friend);
         if(friend){
             for( let i=0; i<friend.length; i++ ){
                 let person= await userData.getUserById(friend[i]);
@@ -183,6 +185,8 @@ router.get('/:userName', async (req, res) => {
                 friendNameAndLink.push(tempForm);
             }
         }
+        // console.log("friend array:")
+        // console.log(friendNameAndLink);
         let event = getUser.events;
         // console.log(event);
         for( let i=0; i<event.length; i++ ){
@@ -194,7 +198,13 @@ router.get('/:userName', async (req, res) => {
             };
             eventNameAndTime.push(tempForm);
         }
-
+        let obj={
+            title: `${req.params.userName}'s Account`,
+            userName: req.params.userName,
+            friend: JSON.stringify(friendNameAndLink),
+            event: JSON.stringify(eventNameAndTime)
+        }
+        // console.log(obj);
         res.render('users/profile', {
             title: `${req.params.userName}'s Account`,
             userName: req.params.userName,
