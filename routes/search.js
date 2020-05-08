@@ -289,11 +289,12 @@ router.get('/addFriends/:userName', async (req, res) => {
     try {
         const addFriendAttempt = await userData.addFriend(req.session.user.userName, req.params.userName)
     } catch (e) {
-        res.render('search/results', {
-            title: 'Search Results',
-            hasError: true,
-            error: [e]
+        res.render('search/addFriends', {
+            title: 'Add Friends',
+            hasErrors: true,
+            errors: [e]
         })
+        return
     }
     
     res.redirect(`/users/${req.params.userName}`)
