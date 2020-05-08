@@ -222,7 +222,7 @@ router.post('/addFriends', async (req, res) => {
     let usersFound
 
     try {
-        let usersFound = await userData.getAllUsers()
+        usersFound = await userData.getAllUsers()
     } catch (e) {
         res.render('search/addFriends', {
             title: 'Add Friends',
