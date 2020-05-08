@@ -197,7 +197,7 @@ router.post('/searchFriends', async (req, res) => {
 // For when they add friends
 router.post('/addFriends', async (req, res) => {
     let userSearchParameter = xss(req.body.searchParameter)
-    let userSearchValue = xss(req.body.searchInput.toLowerCase())
+    let userSearchValue = xss(req.body.searchInput)
     let errors = []
 
     // Check that they filled out the form
@@ -236,8 +236,7 @@ router.post('/addFriends', async (req, res) => {
     switch (userSearchParameter) {
         case "userName":
             for (let i = 0; i < usersFound.length; i++) {
-                usersFound[i].userName = usersFound[i].userName.toLowerCase()
-                if (usersFound[i].userName !== userSearchValue) {
+                if (usersFound[i].userName.toLowerCase() !== userSearchValue.toLowerCase()) {
                     usersFound.splice(i, 1)
                     i--
                 }
@@ -246,8 +245,7 @@ router.post('/addFriends', async (req, res) => {
 
         case "email":
             for (let i = 0; i < usersFound.length; i++) {
-                usersFound[i].email = usersFound[i].email.toLowerCase()
-                if (usersFound[i].email !== userSearchValue) {
+                if (usersFound[i].email.toLowerCase() !== userSearchValue.toLowerCase()) {
                     usersFound.splice(i, 1)
                     i--
                 }
@@ -287,13 +285,14 @@ router.post('/addFriends', async (req, res) => {
 // Get here by clicking on someone's username after searching in add friends
 router.get('/addFriends/:userName', async (req, res) => {
     try {
-        const addFriendAttempt = await userData.addFriend(req.session.user.userName, req.params.userName)
+        const addFriendAttempt = await userData.addFriend(xss(req.session.user.userName), xss(req.params.userName))
     } catch (e) {
-        res.render('search/results', {
-            title: 'Search Results',
-            hasError: true,
-            error: [e]
+        res.render('search/addFriends', {
+            title: 'Add Friends',
+            hasErrors: true,
+            errors: [e]
         })
+        return
     }
     
     res.redirect(`/users/${req.params.userName}`)
