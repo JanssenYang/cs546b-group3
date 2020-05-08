@@ -166,7 +166,7 @@ let updateTimeMonthly=()=>{
                     if( day == edate ){
                         let alink = document.createElement('a');
                         alink.innerHTML = event_thisMonth[i].eventName;
-                        alink.href = "http://localhost:3000/events/"+event_thisMonth[i].eventId;
+                        alink.href = "http://localhost:3000/events/"+event_thisMonth[i].eventId; //cant access unless open in new tab
                         let br = document.createElement('br');
                         data.appendChild(br);
                         data.appendChild(alink);

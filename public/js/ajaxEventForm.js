@@ -19,7 +19,6 @@
         if(!date){
             anyErrors = true;
             eventErrors.show();
-            console.log(eventErrors);
             eventErrors.append("<li>You must input a name</li>");
         }
         if(!location){
