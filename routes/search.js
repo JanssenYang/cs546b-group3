@@ -93,8 +93,8 @@ router.post('/', async (req, res) =>  {
     let currentUser = req.session.user
 
     for (let i = 0; i < eventsFound.length; i++) {
-        // Events displayed must be public, have the user as a participant, or be made by the user
-        if (eventsFound[i].visibility !== 'public' && !eventsFound[i].participants.includes(currentUser._id.toString()) && !eventsFound[i].eventHostID !== currentUser._id.toString()) {
+        // Events displayed must be public, have the user as a participant, be visible to the user via a friend, or be made by the user
+        if (eventsFound[i].visibility !== 'public' && !eventsFound[i].participants.includes(currentUser._id.toString()) && !eventsFound[i].eventHostID !== currentUser._id.toString() && (eventsFound[i].visibility === 'friends' && !req.session.user.friends.includes(eventsFound[i].eventHostID))) {
             eventsFound.splice(i, 1)
             i--
         }
@@ -159,8 +159,7 @@ router.post('/searchFriends', async (req, res) => {
     // Search users based on the user's chosen parameter
 
     for (let i = 0; i < usersFound.length; i++) {
-        usersFound[i][friendSearchParameter] = usersFound[i][friendSearchParameter].toLowerCase()
-        if (usersFound[i][friendSearchParameter] !== friendSearchValue) {
+        if (usersFound[i][friendSearchParameter].toLowerCase() !== friendSearchValue.toLowerCase()) {
             usersFound.splice(i, 1)
             i--
         }
@@ -286,6 +285,8 @@ router.post('/addFriends', async (req, res) => {
 router.get('/addFriends/:userName', async (req, res) => {
     try {
         const addFriendAttempt = await userData.addFriend(xss(req.session.user.userName), xss(req.params.userName))
+        const getNewFriendID = await userData.getUserByUserName(xss(req.params.userName))
+        req.session.user.friends.push(getNewFriendID._id.toString())
     } catch (e) {
         res.render('search/addFriends', {
             title: 'Add Friends',
