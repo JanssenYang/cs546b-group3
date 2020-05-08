@@ -41,7 +41,14 @@ router.get('/addFriends', async (req, res) => {
 // For when they search events
 router.post('/', async (req, res) =>  {
     let eventSearchParameter = xss(req.body.eventSearchParameter)
-    let eventSearchValue = xss(req.body.searchInput)
+    let eventSearchValue
+
+    if (eventSearchParameter === 'date') {
+        eventSearchValue = new Date(xss(req.body.searchInputDate) + " " + xss(req.body.searchInputTime))
+    } else {
+        eventSearchValue = xss(req.body.searchInput)
+    }
+
     let errors = []
 
     // Check that they filled out the form
@@ -62,10 +69,22 @@ router.post('/', async (req, res) =>  {
         return
     }
 
-    let eventsFound = await eventData.getAllEvents()
+    // Declare the variable that will hold the event objects
+    let eventsFound
+
+    try {
+        eventsFound = await eventData.getAllEvents()
+    } catch (e) {
+        res.render('search/events', {
+            title: 'Search Events',
+            hasErrors: true,
+            errors: [e]
+        })
+        return
+    }
 
     for (let i = 0; i < eventsFound.length; i++) {
-        if (eventsFound[i][eventSearchParameter] !== eventSearchValue) {
+        if (eventsFound[i][eventSearchParameter].toString() !== eventSearchValue.toString()) {
             eventsFound.splice(i, 1)
             i--
         }
@@ -124,7 +143,16 @@ router.post('/searchFriends', async (req, res) => {
         return
     }
 
-    let usersFound = await userData.getAllUsers()
+    try {
+        let usersFound = await userData.getAllUsers()
+    } catch (e) {
+        res.render('search/searchFriends', {
+            title: 'Search Friends',
+            hasErrors: true,
+            errors: [e]
+        })
+        return
+    }
 
     // Search users based on the user's chosen parameter
 
@@ -189,9 +217,16 @@ router.post('/addFriends', async (req, res) => {
         return
     }
 
-    let usersFound = await userData.getAllUsers()
-    // The length changes in the switch statement as things get removed. This saves the initial value
-    usersFoundLength = usersFound.length
+    try {
+        let usersFound = await userData.getAllUsers()
+    } catch (e) {
+        res.render('search/addFriends', {
+            title: 'Add Friends',
+            hasErrors: true,
+            errors: [e]
+        })
+        return
+    }
 
     // Search users based on the user's chosen parameter
     switch (userSearchParameter) {
@@ -253,7 +288,7 @@ router.get('/addFriends/:userName', async (req, res) => {
         res.render('search/results', {
             title: 'Search Results',
             hasError: true,
-            error: e
+            error: [e]
         })
     }
     
