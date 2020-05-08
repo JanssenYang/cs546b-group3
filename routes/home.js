@@ -17,7 +17,7 @@ router.get('/', async (req, res)=>{
         let eventNameAndTime=[];
 
         let user = await userData.getUserById(tempUser._id);
-        let friend = user.friend;
+        let friend = user.friends;
         if(friend){
             for( let i=0; i<friend.length; i++ ){
                 let person= await userData.getUserById(friend[i]);
