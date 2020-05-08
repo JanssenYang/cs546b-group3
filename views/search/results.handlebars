@@ -1,5 +1,8 @@
 <h1>Search Results</h1>
 <main>
+    {{#if hasError}}
+        <p>{{error}}</p>
+    {{else}}
     {{#if matchingResults}}
         {{#if searchEvents}}
             <ul class="event-list">
@@ -22,22 +25,17 @@
         {{/if}}
 
         {{#if addFriends}}
-            {{#if hasError}}
-                <div>
-                    Could not add friend. Error: {{error}}
-                </div>
-            {{else}}
-                <ul class="user-list">
-                    {{#each users}}
-                        <li>
-                            <a href = '/search/addFriends/{{this.userName}}'>{{this.userName}}</a>
-                        </li>
-                    {{/each}}
-                </ul>
+            <ul class="user-list">
+                {{#each users}}
+                    <li>
+                        <a href = '/search/addFriends/{{this.userName}}'>{{this.userName}}</a>
+                    </li>
+                {{/each}}
+            </ul>
             {{/if}}
-        {{/if}}
     {{else}}
         <p>No results found.</p>
+    {{/if}}
     {{/if}}
 
     <div>
