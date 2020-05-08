@@ -93,6 +93,13 @@ router.post('/', async (req, res) =>  {
     let currentUser = req.session.user
 
     for (let i = 0; i < eventsFound.length; i++) {
+        // Remove events that are private that the user did not create
+        if(eventsFound[i].visibility === 'private' && currentUser._id.toString() !== eventsFound[i].eventHostID) {
+            eventsFound.splice(i, 1)
+            i--
+            continue
+        }
+
         // Events displayed must be public, have the user as a participant, be visible to the user via a friend, or be made by the user
         if (eventsFound[i].visibility !== 'public' && !eventsFound[i].participants.includes(currentUser._id.toString()) && !eventsFound[i].eventHostID !== currentUser._id.toString() && (eventsFound[i].visibility === 'friends' && !req.session.user.friends.includes(eventsFound[i].eventHostID))) {
             eventsFound.splice(i, 1)
