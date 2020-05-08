@@ -9,7 +9,7 @@ const xss = require("xss");
 //Single event page
 router.get('/:id', async (req, res) => {
     try{
-        const event = await eventData.getEvent(req.params.id);
+        const event = await eventData.getEvent(xss(req.params.id));
     
         const participants = event.participants;
         let participantObjects = [];
@@ -80,8 +80,6 @@ router.post("/newEvent", async(req, res) => {
             startInp: xss(req.body.start),
             endInp: xss(req.body.end),
         };
-        console.log(req.body.date);
-        console.log(event.dateInp);
         let newEvent = await eventData.addEvent(event.nameInp, "public", event.dateInp, event.startInp, event.endInp, event.locationInp, req.session.user._id);
         res.render("partials/addAjaxEvent", {
             layout: null,

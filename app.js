@@ -41,7 +41,7 @@ app.use("/users/logout", (req, res, next) => {
 	}
 });
 
-app.use("/events", (req, res, next) => { //check specific events too
+app.use("/events", (req, res, next) => { //checks specific events too
 	if(!req.session.user){
 		res.redirect("/");
 	}
@@ -51,6 +51,15 @@ app.use("/events", (req, res, next) => { //check specific events too
 });
 
 app.use("/search", (req, res, next) => {
+	if(!req.session.user){
+		res.redirect("/");
+	}
+	else{
+		next();
+	}
+});
+
+app.use("/home", (req, res, next) =>{
 	if(!req.session.user){
 		res.redirect("/");
 	}
