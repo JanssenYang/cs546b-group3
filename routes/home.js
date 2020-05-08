@@ -63,11 +63,16 @@ router.post("/newEvent", async(req, res) => {
     let anyErrors = false;
     let name = xss(req.body.privateEventName)
     let location = xss(req.body.privateLocation);
+    let type = xss(req.body.privateEventType) //finish
     let date = xss(req.body.privateEventDate);
     let start = xss(req.body.privateStartTime);
     let end = xss(req.body.privateEndTime);
     if(!name){
         eventErrors.push("You must input a name");
+        anyErrors = true;
+    }
+    if(!type){
+        eventErrors.push("You must input an event type");
         anyErrors = true;
     }
     if(!location){
@@ -92,7 +97,7 @@ router.post("/newEvent", async(req, res) => {
     }
     else{
         try{
-            await eventData.addEvent(name, "private", new Date(date + " " + start), start, end, location, req.session.user._id);
+            await eventData.addEvent(name, type, new Date(date + " " + start), start, end, location, req.session.user._id);
             res.redirect("/home");
             return;
         }
