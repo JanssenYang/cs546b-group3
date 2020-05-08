@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 const data = require('../data')
 const userData = data.users
+const eventData = data.events;
 const path = require('path')
 const bcrypt = require("bcryptjs");
 const xss = require("xss");
@@ -167,9 +168,38 @@ router.get('/:userName', async (req, res) => {
             }
         }
         //this will be where we get event info from mongo and display in the user's calendar
+        let friendNameAndLink=[];
+        let eventNameAndTime=[];
+
+        let friend = getUser.friend;
+        if(friend){
+            for( let i=0; i<friend.length; i++ ){
+                let person= await userData.getUserById(friend[i]);
+                //use the name to show who the friend is, use id to link the friend on the page
+                let tempForm={
+                    userName: person.userName,
+                    usersId: friend[i]
+                };
+                friendNameAndLink.push(tempForm);
+            }
+        }
+        let event = getUser.events;
+        // console.log(event);
+        for( let i=0; i<event.length; i++ ){
+            let aEvent = await eventData.getEvent(event[i]);
+            let tempForm={
+                eventName: aEvent.eventName,
+                eventdate: aEvent.date,
+                eventId: event[i]
+            };
+            eventNameAndTime.push(tempForm);
+        }
+
         res.render('users/profile', {
             title: `${req.params.userName}'s Account`,
-            userName: req.params.userName
+            userName: req.params.userName,
+            friend: JSON.stringify(friendNameAndLink),
+            event: JSON.stringify(eventNameAndTime)
         })
     }catch(e){
         res.status(404).render("layouts/error", {
