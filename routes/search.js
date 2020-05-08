@@ -143,8 +143,10 @@ router.post('/searchFriends', async (req, res) => {
         return
     }
 
+    let usersFound
+
     try {
-        let usersFound = await userData.getAllUsers()
+        usersFound = await userData.getAllUsers()
     } catch (e) {
         res.render('search/searchFriends', {
             title: 'Search Friends',
@@ -216,6 +218,8 @@ router.post('/addFriends', async (req, res) => {
         })
         return
     }
+
+    let usersFound
 
     try {
         let usersFound = await userData.getAllUsers()
