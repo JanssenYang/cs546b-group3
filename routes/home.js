@@ -33,6 +33,7 @@ router.get('/', async (req, res)=>{
             let tempForm={
                 eventName: aEvent.eventName,
                 eventdate: aEvent.date,
+                eventLocation: aEvent.location,
                 eventId: event[i]
             };
             eventNameAndTime.push(tempForm);

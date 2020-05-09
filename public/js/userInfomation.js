@@ -114,13 +114,19 @@ let updateTimeWeekly=()=>{
             if( date[0] == y ){
                 if( date[1] == m ){
                     if( date[2] == d ){
+                        let text = document.createElement('article');
+                        //eventName
                         let alink = document.createElement('a');
                         alink.innerHTML = event[j].eventName;
                         alink.href = "http://localhost:3000/events/"+event[j].eventId;
-                        // console.log(alink);
                         let br = document.createElement('br');
-                        td2.appendChild(br);
-                        td2.appendChild(alink);
+                        text.appendChild(alink);
+                        text.appendChild(br);
+                        //event location
+                        let p = document.createElement('p');
+                        p.innerHTML = "location:"+event[j].eventLocation;
+                        text.appendChild(p);
+                        td2.appendChild(text);
                     }
                 }
             }
