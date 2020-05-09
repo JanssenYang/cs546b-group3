@@ -1,6 +1,7 @@
 const mongoCollections = require('../config/mongoCollections')
 const users = mongoCollections.users
 const events = mongoCollections.events
+const bcrypt = require("bcryptjs");
 const { ObjectId } = require('mongodb')
 
 module.exports = {
@@ -19,11 +20,12 @@ module.exports = {
 
         const userCollection = await users()
 
+        const hash = await bcrypt.hash(password, 16);
         let newUser = {
             firstName: firstName,
             lastName: lastName,
             userName: userName,
-            hashedPassword: password,
+            hashedPassword: hash,
             email: email,
             friends: [],
             events: []
@@ -113,7 +115,15 @@ module.exports = {
 
         //Setting it up so that if a user adds a friend, they will also be added to
         //that users' friends list
+
+        //Don't let the users add each other as friends twice
         let friendsList = user.friends;
+        for(let index = 0; index < friendsList.length; index++){
+            if(friendsList[index] === friend._id.toString()){
+                throw 'Error: already friends with this user';
+            }
+        }
+
         friendsList.push(friend._id.toString());
         user.friends = friendsList;
 

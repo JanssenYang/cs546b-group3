@@ -4,6 +4,7 @@
   "description": "Schedule Sharing Web Application",
   "main": "app.js",
   "scripts": {
+    "seed": "node ./tasks/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/JanssenYang/cs546b-group3#readme",
   "dependencies": {
+    "@khanacademy/tota11y": "^0.2.0",
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.3",
