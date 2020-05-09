@@ -6,6 +6,53 @@ td{
     height: 50pt;
 }
 
+body{
+    background-color: snow;
+    text-align: center;
+}
+
+h1{
+    color: blue;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+button{
+    background-color: white;
+    color:blue;
+    border: 2px solid blue;
+    transition-duration: 0.4s;
+    border-radius: 25px;
+}
+  
+button:hover{
+    background-color: blue;
+    color: white;
+}
+
+label{
+    color: blue;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
 .td_title{
     height: 20pt;
+}
+
+.login{
+  color: black;
+  width: 12rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  height: 17px;
+}
+
+#footer{
+    color: blue;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-align: center;
+  font-style: italic;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
 }
