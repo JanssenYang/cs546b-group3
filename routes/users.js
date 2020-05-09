@@ -195,6 +195,7 @@ router.get('/:userName', async (req, res) => {
                 eventName: aEvent.eventName,
                 eventdate: aEvent.date,
                 eventLocation: aEvent.location,
+                vis: aEvent.visibility,
                 eventId: event[i]
             };
             eventNameAndTime.push(tempForm);
@@ -219,5 +220,27 @@ router.get('/:userName', async (req, res) => {
         });
     }
 })
+router.get("/:userName?eventId", async(req, res)=>{
+    try{
+        if( !req.session.user ){
+            res.redirect('/');
+        }
+        const user = req.session.user;
+        let mark=false;
+        const event = await eventData.getEvent(req.params.eventId);
+        for( let i=0; i<event.participants.length; i++ ){
+            if( event.participants[i] === user._id.toString() ){
+                mark=true; break;
+            }
+        }
+        if( !mark ) res.redirect('/');
+        await eventDate.changeVisibility(eventId);
+        res.redirect('/');
+    }
+    catch(e){
+        res.status(500).render("events/eventErrors", {error: e});
+        return;
+    }
+});
 
 module.exports = router;

@@ -40,7 +40,7 @@ let transFromTimeToArray=(str)=>{
 }
 //update month and year every 2 second.
 setTimeout("updateTime()", 20);
-setInterval( "updateTime();", 2000 );
+// setInterval( "updateTime();", 2000 );
 // setTimeout( "updateTime();",200 );//for test
 let cleanTable=()=>{
     let rowLength = table.rows.length;
@@ -114,7 +114,7 @@ let updateTimeWeekly=()=>{
             if( date[0] == y ){
                 if( date[1] == m ){
                     if( date[2] == d ){
-                        let text = document.createElement('article');
+                        let text = document.createElement('form');
                         //eventName
                         let alink = document.createElement('a');
                         alink.innerHTML = event[j].eventName;
@@ -126,6 +126,19 @@ let updateTimeWeekly=()=>{
                         let p = document.createElement('p');
                         p.innerHTML = "location:"+event[j].eventLocation;
                         text.appendChild(p);
+                        // set visibility
+                        let p1 = document.createElement('a');
+                        p1.innerHTML = ""+event[j].vis;
+                        p1.href = ""
+                        text.appendChild(p1);
+
+                        // let vis = document.createElement('button');
+                        // // vis.setAttribute("summit");
+                        // vis.innerHTML = "change";
+                        // vis.name = event[j].eventId;
+                        // vis.className = "visibility";
+                        // text.appendChild(vis);
+
                         td2.appendChild(text);
                     }
                 }
