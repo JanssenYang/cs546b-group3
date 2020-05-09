@@ -1,0 +1,45 @@
+<h1>Search Results</h1>
+<main>
+    {{#if hasError}}
+        <p>{{error}}</p>
+    {{else}}
+    {{#if matchingResults}}
+        {{#if searchEvents}}
+            <ul class="event-list">
+                {{#each events}}
+                    <li>
+                        <a href = '/events/{{this._id}}'>{{this.eventName}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        {{/if}}
+
+        {{#if searchFriends}}
+            <ul class="friend-list">
+                {{#each friends}}
+                    <li>
+                        <a href = '/users/{{this.userName}}'>{{this.userName}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        {{/if}}
+
+        {{#if addFriends}}
+            <ul class="user-list">
+                {{#each users}}
+                    <li>
+                        <a href = '/search/addFriends/{{this.userName}}'>{{this.userName}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+            {{/if}}
+    {{else}}
+        <p>No results found.</p>
+    {{/if}}
+    {{/if}}
+
+    <div>
+        <a href = '/search'>Search again</a>
+    </div>
+
+</main>

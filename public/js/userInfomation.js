@@ -39,7 +39,8 @@ let transFromTimeToArray=(str)=>{
     return str;
 }
 //update month and year every 2 second.
-setInterval( "updateTime();", 20 );
+setTimeout("updateTime()", 20);
+setInterval( "updateTime();", 2000 );
 // setTimeout( "updateTime();",200 );//for test
 let cleanTable=()=>{
     let rowLength = table.rows.length;
@@ -116,6 +117,7 @@ let updateTimeWeekly=()=>{
                         let alink = document.createElement('a');
                         alink.innerHTML = event[j].eventName;
                         alink.href = "http://localhost:3000/events/"+event[j].eventId;
+                        // console.log(alink);
                         let br = document.createElement('br');
                         td2.appendChild(br);
                         td2.appendChild(alink);
@@ -164,7 +166,7 @@ let updateTimeMonthly=()=>{
                     if( day == edate ){
                         let alink = document.createElement('a');
                         alink.innerHTML = event_thisMonth[i].eventName;
-                        alink.href = "http://localhost:3000/events/"+event_thisMonth[i].eventId;
+                        alink.href = "http://localhost:3000/events/"+event_thisMonth[i].eventId; //cant access unless open in new tab
                         let br = document.createElement('br');
                         data.appendChild(br);
                         data.appendChild(alink);

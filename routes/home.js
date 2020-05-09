@@ -3,12 +3,9 @@ const router = express.Router();
 const data = require('../data')
 const userData = data.users;
 const eventData = data.events;
+const xss = require("xss");
 
 router.get('/', async (req, res)=>{
-    if( !req.session.user ){
-        res.redirect('/');
-        return;
-    }
     try{
         let tempUser = req.session.user;
         // let friendNameAndLink=[{userName:"testname", userId: "testId"}];
@@ -17,7 +14,7 @@ router.get('/', async (req, res)=>{
         let eventNameAndTime=[];
 
         let user = await userData.getUserById(tempUser._id);
-        let friend = user.friend;
+        let friend = user.friends;
         if(friend){
             for( let i=0; i<friend.length; i++ ){
                 let person= await userData.getUserById(friend[i]);
@@ -44,7 +41,7 @@ router.get('/', async (req, res)=>{
 
         let obj={
             title: `${user.userName}'s Home`,
-            // userName: user.userName,
+            userName: user.userName,
             friend: JSON.stringify(friendNameAndLink),
             event: JSON.stringify(eventNameAndTime)
         };
@@ -54,6 +51,60 @@ router.get('/', async (req, res)=>{
             title: "404 Error: Not Found",
             error: e 
         });
+    }
+});
+
+router.get("/newEvent", async(req, res) => {
+    res.render("home/privateEventForm", {anyErrors: false});
+});
+
+router.post("/newEvent", async(req, res) => {
+    let eventErrors = [];
+    let anyErrors = false;
+    let name = xss(req.body.privateEventName)
+    let location = xss(req.body.privateLocation);
+    let type = xss(req.body.privateEventType) //finish
+    let date = xss(req.body.privateEventDate);
+    let start = xss(req.body.privateStartTime);
+    let end = xss(req.body.privateEndTime);
+    if(!name){
+        eventErrors.push("You must input a name");
+        anyErrors = true;
+    }
+    if(!type){
+        eventErrors.push("You must input an event type");
+        anyErrors = true;
+    }
+    if(!location){
+        eventErrors.push("You must input a location");
+        anyErrors = true;
+    }
+    if(!date){
+        eventErrors.push("You must input a date");
+        anyErrors = true;
+    }
+    if(!start){
+        eventErrors.push("You must input a start time");
+        anyErrors = true;
+    }
+    if(!end){
+        eventErrors.push("You must input an end time");
+        anyErrors = true;
+    }
+    if(anyErrors){        
+        res.render("home/privateEventForm", {anyErrors: true, errors: eventErrors});
+        return;
+    }
+    else{
+        try{
+            await eventData.addEvent(name, type, new Date(date + " " + start), start, end, location, req.session.user._id);
+            res.redirect("/home");
+            return;
+        }
+        catch(e){
+            res.status(500).render("layouts/error", {title: "500: Internal server Error", error: e});
+            return;
+        }
     }
 });
 

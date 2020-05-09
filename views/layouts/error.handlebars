@@ -2,3 +2,15 @@
 <main>
   <p class="info">{{error}}</p>
 </main>
+
+<p id="gohome" hidden></p>
+<script>
+  let a = document.getElementById("gohome")
+  //console.log(a);
+  if(a){
+    setTimeout("go()", 2000);
+  }
+  let go=()=>{
+    location.href = "http://localhost:3000";
+  }
+</script>
