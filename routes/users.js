@@ -151,7 +151,7 @@ router.get('/:userName', async (req, res) => {
         const getUser = await userData.getUserByUserName(req.params.userName);
 
         //If the user is logged in and the userName is not their own, check to see
-        if(req.params.userName !== req.session.user.userName){
+        if(req.params.userName === req.session.user.userName){
             res.redirect('/');return;
         }
         //if the user is friend's with that person. If not, they can't view their profile.
