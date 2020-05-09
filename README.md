@@ -1,4 +1,4 @@
-# Schedule Sharing Web Application
+# "Schedu-Share": Schedule Sharing Web Application
 
 CS-546-B Group 3:
 Nick Primamore, Conner Zeigman, Liam King, Sen Yang
