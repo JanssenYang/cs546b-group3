@@ -1,10 +1,10 @@
-<h1>Welcome</h1>
+<h1>Welcome to Schedu-Share!</h1>
 <form action="/users/login" method="post">
     <label for="userName">Username:</label><br>
-    <input type="text" id="userName" name="userName"><br>
+    <input class="login" type="text" id="userName" name="userName" placeholder="Enter username"><br><br>
     <label for="password">Password:</label><br>
-    <input type="password" id="password" name="password"><br><br>
-    <input type="submit" value="Submit">
+    <input class="login" type="password" id="password" name="password" placeholder="Enter password"><br><br>
+    <button id="submitButton" type="submit">Login</button>
 </form><br>
 
 {{#if hasErrors}}
@@ -18,3 +18,13 @@
 {{/if}}
 
 <a href='/users/new'>Create an account</a>
+
+<footer id="footer">
+    <p>
+        &copy; CS-546-B Group 3:&nbsp;
+        Nick Primamore,&nbsp;
+        Conner Zeigman,&nbsp; 
+        Liam King,&nbsp;
+        Sen Yang
+    </p>
+</footer>
