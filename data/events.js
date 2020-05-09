@@ -165,7 +165,7 @@ module.exports = {
             change.visibility = "private";
         }else change.visibility = "public";
 
-        const updatedInfo = await eventCollection.updateOne( {_id:id}, {$set:change} );
+        const updatedInfo = await eventCollection.updateOne( {_id:eventID}, {$set:change} );
         if( updatedInfo === 0 ) throw 'could not change the visibility';
 
         return change;

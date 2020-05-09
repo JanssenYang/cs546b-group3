@@ -129,7 +129,7 @@ let updateTimeWeekly=()=>{
                         // set visibility
                         let p1 = document.createElement('a');
                         p1.innerHTML = ""+event[j].vis;
-                        p1.href = ""
+                        p1.href = "http://localhost:3000/home/"+event[j].eventId;
                         text.appendChild(p1);
 
                         // let vis = document.createElement('button');

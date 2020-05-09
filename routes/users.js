@@ -112,7 +112,7 @@ router.post('/login', async (req, res) => {
             const expiresAt = new Date();
             expiresAt.setHours(expiresAt.getHours() + 1);
             req.session.cookie.expires = expiresAt;
-            res.redirect(`/users/${xss(userInfo.userName)}`)
+            res.redirect(`/home`)
             return
         } else {
             throw 'Username and/or password incorrect'
@@ -151,6 +151,9 @@ router.get('/:userName', async (req, res) => {
         const getUser = await userData.getUserByUserName(req.params.userName);
 
         //If the user is logged in and the userName is not their own, check to see
+        if(req.params.userName !== req.session.user.userName){
+            res.redirect('/');return;
+        }
         //if the user is friend's with that person. If not, they can't view their profile.
         if(req.params.userName !== req.session.user.userName){
             const friendsList = req.session.user.friends;
@@ -219,27 +222,6 @@ router.get('/:userName', async (req, res) => {
         });
     }
 })
-router.get("/:userName?eventId", async(req, res)=>{
-    try{
-        if( !req.session.user ){
-            res.redirect('/');
-        }
-        const user = req.session.user;
-        let mark=false;
-        const event = await eventData.getEvent(req.params.eventId);
-        for( let i=0; i<event.participants.length; i++ ){
-            if( event.participants[i] === user._id.toString() ){
-                mark=true; break;
-            }
-        }
-        if( !mark ) res.redirect('/');
-        await eventDate.changeVisibility(eventId);
-        res.redirect('/');
-    }
-    catch(e){
-        res.status(500).render("events/eventErrors", {error: e});
-        return;
-    }
-});
+
 
 module.exports = router;
