@@ -13,7 +13,7 @@ const constructorMethod = app => {
     app.get('/', (req, res) => {
         if(req.session.user){
             //An authenticated user should never see the login screen
-            res.redirect(`/users/${req.session.user.userName}`);
+            res.redirect(`/home`);
         }
         else{
             res.render('layouts/login', {

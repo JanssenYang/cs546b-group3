@@ -114,7 +114,7 @@ let updateTimeWeekly=()=>{
             if( date[0] == y ){
                 if( date[1] == m ){
                     if( date[2] == d ){
-                        let text = document.createElement('article');
+                        let text = document.createElement('form');
                         //eventName
                         let alink = document.createElement('a');
                         alink.innerHTML = event[j].eventName;
@@ -126,6 +126,19 @@ let updateTimeWeekly=()=>{
                         let p = document.createElement('p');
                         p.innerHTML = "location:"+event[j].eventLocation;
                         text.appendChild(p);
+                        // set visibility
+                        let p1 = document.createElement('a');
+                        p1.innerHTML = ""+event[j].vis;
+                        p1.href = "http://localhost:3000/home/"+event[j].eventId;
+                        text.appendChild(p1);
+
+                        // let vis = document.createElement('button');
+                        // // vis.setAttribute("summit");
+                        // vis.innerHTML = "change";
+                        // vis.name = event[j].eventId;
+                        // vis.className = "visibility";
+                        // text.appendChild(vis);
+
                         td2.appendChild(text);
                     }
                 }
@@ -170,12 +183,25 @@ let updateTimeMonthly=()=>{
                 for(let i=0; i<event_thisMonth.length; i++){
                     let edate = event_thisMonth[i].eventdate[2];
                     if( day == edate ){
+                        let text = document.createElement('form');
                         let alink = document.createElement('a');
                         alink.innerHTML = event_thisMonth[i].eventName;
                         alink.href = "http://localhost:3000/events/"+event_thisMonth[i].eventId; //cant access unless open in new tab
                         let br = document.createElement('br');
-                        data.appendChild(br);
-                        data.appendChild(alink);
+                        text.appendChild(alink);
+                        text.appendChild(br);
+                        
+                        //event location
+                        let p = document.createElement('p');
+                        p.innerHTML = "location:"+event_thisMonth[i].eventLocation;
+                        text.appendChild(p);
+                        // set visibility
+                        let p1 = document.createElement('a');
+                        p1.innerHTML = ""+event_thisMonth[i].vis;
+                        p1.href = "http://localhost:3000/home/"+event_thisMonth[i].eventId;
+                        text.appendChild(p1);
+
+                        data.appendChild(text);
                     }
                 }
             }

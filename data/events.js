@@ -151,5 +151,23 @@ module.exports = {
         }
 
         return deletedEvent;
+    },
+
+    async changeVisibility(eventID){
+        if (!eventID) throw 'Error: event ID must be provided.';
+        if (typeof eventID !== 'string' && typeof eventID !== 'object') throw 'Error: event ID must be a string or object ID.'
+        if (typeof eventID === 'string') {
+            eventID = ObjectId.createFromHexString(eventID);
+        }
+        const eventCollection = await events();
+        const change = await this.getEvent(eventID);
+        if( change.visibility === "public" ){
+            change.visibility = "private";
+        }else change.visibility = "public";
+
+        const updatedInfo = await eventCollection.updateOne( {_id:eventID}, {$set:change} );
+        if( updatedInfo === 0 ) throw 'could not change the visibility';
+
+        return change;
     }
 }
