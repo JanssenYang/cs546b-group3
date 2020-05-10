@@ -1,6 +1,6 @@
 <h1 class="error">{{title}}</h1>
 <main>
-  <p class="info">{{error}}</p>
+  <p id="errorInfo">{{error}}</p>
 </main>
 
 <p id="gohome" hidden></p>
@@ -8,7 +8,8 @@
   let a = document.getElementById("gohome")
   //console.log(a);
   if(a){
-    setTimeout("go()", 2000);
+    //only stays on the error page for 5 seconds
+    setTimeout("go()", 5000);
   }
   let go=()=>{
     location.href = "http://localhost:3000";
