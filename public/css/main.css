@@ -197,3 +197,8 @@ ul, ol{
     display: table;
     margin: 0 auto;
 }
+
+#user_friendList a{
+    margin-left: 5px;
+    margin-right: 5px;
+}

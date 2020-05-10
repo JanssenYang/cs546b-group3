@@ -199,6 +199,8 @@ router.get('/:userName', async (req, res) => {
         // console.log(event);
         for( let i=0; i<event.length; i++ ){
             let aEvent = await eventData.getEvent(event[i]);
+            //prevent visit friends' private events
+            if( aEvent.visibility === "private" ) continue;
             let tempForm={
                 eventName: aEvent.eventName,
                 eventdate: aEvent.date,
