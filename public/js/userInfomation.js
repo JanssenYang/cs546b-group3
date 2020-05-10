@@ -183,7 +183,7 @@ let updateTimeMonthly=()=>{
                 for(let i=0; i<event_thisMonth.length; i++){
                     let edate = event_thisMonth[i].eventdate[2];
                     if( day == edate ){
-                        let text = document.createElement('form');
+                        let text = document.createElement('article');
                         let alink = document.createElement('a');
                         alink.innerHTML = event_thisMonth[i].eventName;
                         alink.href = "http://localhost:3000/events/"+event_thisMonth[i].eventId; //cant access unless open in new tab
