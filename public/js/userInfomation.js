@@ -114,7 +114,8 @@ let updateTimeWeekly=()=>{
             if( date[0] == y ){
                 if( date[1] == m ){
                     if( date[2] == d ){
-                        let text = document.createElement('form');
+                        let text = document.createElement('article');
+                        text.className = "tableData";
                         //eventName
                         let alink = document.createElement('a');
                         alink.innerHTML = event[j].eventName;
@@ -124,10 +125,12 @@ let updateTimeWeekly=()=>{
                         text.appendChild(br);
                         //event location
                         let p = document.createElement('p');
+                        p.hidden = true;
                         p.innerHTML = "location:"+event[j].eventLocation;
                         text.appendChild(p);
                         // set visibility
                         let p1 = document.createElement('a');
+                        p1.hidden = true;
                         p1.innerHTML = ""+event[j].vis;
                         p1.href = "http://localhost:3000/home/"+event[j].eventId;
                         text.appendChild(p1);
@@ -179,11 +182,15 @@ let updateTimeMonthly=()=>{
             if( day<=0 || day>mDay ){
             
             }else{
-                data.innerHTML = day;
+                let num = document.createElement('p');
+                num.innerHTML = day;
+                num.className = "dateInTable";
+                data.appendChild(num);
                 for(let i=0; i<event_thisMonth.length; i++){
                     let edate = event_thisMonth[i].eventdate[2];
                     if( day == edate ){
                         let text = document.createElement('article');
+                        text.className = "tableData";
                         let alink = document.createElement('a');
                         alink.innerHTML = event_thisMonth[i].eventName;
                         alink.href = "http://localhost:3000/events/"+event_thisMonth[i].eventId; //cant access unless open in new tab
@@ -194,9 +201,11 @@ let updateTimeMonthly=()=>{
                         //event location
                         let p = document.createElement('p');
                         p.innerHTML = "location:"+event_thisMonth[i].eventLocation;
+                        p.hidden = true;
                         text.appendChild(p);
                         // set visibility
                         let p1 = document.createElement('a');
+                        p1.hidden = true;
                         p1.innerHTML = ""+event_thisMonth[i].vis;
                         p1.href = "http://localhost:3000/home/"+event_thisMonth[i].eventId;
                         text.appendChild(p1);

@@ -88,3 +88,36 @@ a:hover{
   width: 100%;
   position: fixed;
 }
+
+.tableData{
+    text-align: left;
+}
+
+.tableData a{
+    text-decoration: none;
+}
+.tableData a:link{
+    color: blue; 
+}
+.tableData a:visited{
+    color:blue;
+}
+.tableData a:hover{
+    color: red;
+    text-decoration: underline;
+}
+header{
+    height: 90px;
+    background-color: #123456;
+}
+
+nav{
+    height: 30px;
+    background-color: beige;
+}
+
+li{
+    float: left;
+    width: 150px;
+    height: 30px;
+}
