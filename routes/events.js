@@ -29,6 +29,10 @@ router.get('/:id', async (req, res) => {
         if((participantObjects.map((obj) => {return obj.userName})).includes(req.session.user.userName)){
             inEvent = true;
         }
+        let isPrivate = false;
+        if(event.visibility === "private"){
+            isPrivate = true;
+        }
         res.render('events/singleEvent', 
             {
                 event: event,
@@ -36,7 +40,8 @@ router.get('/:id', async (req, res) => {
                 participants: participantObjects,
                 userId: req.session.user._id,
                 inEvent: inEvent,
-                owner: owner
+                owner: owner,
+                isPrivate: isPrivate
             });
         return;
     }
