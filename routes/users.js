@@ -116,7 +116,7 @@ router.post('/login', async (req, res) => {
             const expiresAt = new Date();
             expiresAt.setHours(expiresAt.getHours() + 1);
             req.session.cookie.expires = expiresAt;
-            res.redirect(`/users/${xss(userInfo.userName)}`)
+            res.redirect(`/home`)
             return
         } else {
             throw 'Username and/or password incorrect'
@@ -156,6 +156,9 @@ router.get('/:userName', async (req, res) => {
         const getUser = await userData.getUserByUserName(req.params.userName);
 
         //If the user is logged in and the userName is not their own, check to see
+        if(req.params.userName === req.session.user.userName){
+            res.redirect('/');return;
+        }
         //if the user is friend's with that person. If not, they can't view their profile.
         if(req.params.userName !== req.session.user.userName){
             currUser = false;

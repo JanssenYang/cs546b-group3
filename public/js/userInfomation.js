@@ -114,7 +114,7 @@ let updateTimeWeekly=()=>{
             if( date[0] == y ){
                 if( date[1] == m ){
                     if( date[2] == d ){
-                        let text = document.createElement('article');
+                        let text = document.createElement('form');
                         //eventName
                         let alink = document.createElement('a');
                         alink.innerHTML = event[j].eventName;

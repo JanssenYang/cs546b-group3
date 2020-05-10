@@ -153,7 +153,6 @@ module.exports = {
         return deletedEvent;
     },
 
-    
     async changeVisibility(eventID){
         if (!eventID) throw 'Error: event ID must be provided.';
         if (typeof eventID !== 'string' && typeof eventID !== 'object') throw 'Error: event ID must be a string or object ID.'

@@ -8,6 +8,7 @@ const xss = require("xss");
 router.get('/', async (req, res)=>{
     try{
         let tempUser = req.session.user;
+        let currUser = true;
         // let friendNameAndLink=[{userName:"testname", userId: "testId"}];
         // let eventNameAndTime=[{eventName:"group meeting", eventdate: new Date(),eventId: "testEventId"}];
         let friendNameAndLink=[];
@@ -45,7 +46,8 @@ router.get('/', async (req, res)=>{
             title: `${user.userName}'s Home`,
             userName: user.userName,
             friend: JSON.stringify(friendNameAndLink),
-            event: JSON.stringify(eventNameAndTime)
+            event: JSON.stringify(eventNameAndTime),
+            currUser: currUser
         };
         res.render('home/normal', obj);
     }catch(e){
@@ -82,4 +84,5 @@ router.get("/:id", async(req, res)=>{
         });
     }
 });
+
 module.exports = router;
