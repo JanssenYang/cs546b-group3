@@ -137,7 +137,7 @@ router.post("/deleteEvent:id", async(req, res) => {
 router.post("/addComment:id", async(req, res) => {
     try{
         let currDate = new Date();
-        await eventData.addComment(xss(req.params.id), req.session.user.userName, xss(req.body["commentText"]), currDate, currDate.getHours() + " " + currDate.getMinutes);
+        await eventData.addComment(xss(req.params.id), req.session.user.userName, xss(req.body["commentText"]), currDate, currDate.getHours() + ":" + currDate.getMinutes());
         res.redirect("/events/" + xss(req.params.id));
         return;
     }
