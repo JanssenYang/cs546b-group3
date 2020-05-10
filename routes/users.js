@@ -200,6 +200,7 @@ router.get('/:userName', async (req, res) => {
                 eventName: aEvent.eventName,
                 eventdate: aEvent.date,
                 eventLocation: aEvent.location,
+                vis: aEvent.visibility,
                 eventId: event[i]
             };
             eventNameAndTime.push(tempForm);
