@@ -1,32 +1,42 @@
-<h1>Add a New Private Event</h1>
+<header>
+    <nav>
+    <ul id="navBar">
+        <li><a href="http://localhost:3000">Home</a></li>
+        <li><a href="http://localhost:3000/events">Public Events</a></li>
+        <li><a href="http://localhost:3000/search">Search Events/Add Friends</a></li>
+        <li><a href="http://localhost:3000/users/logout">Logout</a></li>
+    </ul>
+    </nav>
+</header>
+<h1>Add a New Event</h1>
 <form method="POST" action="/users/newEvent" id="privateNewEventForm">
     <label>
         Event Name
-        <input name="privateEventName" type="text">
-    </label>
+        <input class="addEventInput" name="privateEventName" type="text">
+    </label><br><br>
     <label>
-        Event type
-        <select name="privateEventType">
+        Event Type
+        <select class="eventType" name="privateEventType">
             <option value="private">Private (Only you can see it)</option>
             <option value="friends">Friends (You and your friends can see it)</option>
         </select>
-    </label>
+    </label><br><br>
     <label>
         Location
-        <input name="privateLocation" type="text">
-    </label>
+        <input class="addEventInput" name="privateLocation" type="text">
+    </label><br><br>
     <label>
         Date
-        <input name="privateEventDate" type="date">
-    </label>
+        <input class="addEventInput" name="privateEventDate" type="date">
+    </label><br><br>
     <label>
         Start Time
-        <input name="privateStartTime" type="time">
-    </label>
+        <input class="addEventInput" name="privateStartTime" type="time">
+    </label><br><br>
     <label>
         End time
-        <input name="privateEndTime" type="time">
-    </label>
+        <input class="addEventInput" name="privateEndTime" type="time">
+    </label><br><br>
     <input type="submit" value="Submit Event">
 </form>
 

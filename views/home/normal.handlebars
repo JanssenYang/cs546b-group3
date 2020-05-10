@@ -1,7 +1,17 @@
+<header>
+  <nav>
+    <ul id="navBar">
+      <li><a href="http://localhost:3000">Home</a></li>
+      <li><a href="http://localhost:3000/events">Public Events</a></li>
+      <li><a href="http://localhost:3000/search">Search Events/Add Friends</a></li>
+      <li><a href="http://localhost:3000/users/logout">Logout</a></li>
+    </ul>
+  </nav>
+</header>
 <h1>Welcome to your home, {{{userName}}}!</h1>
 <br>
 <article id="user_friendList">
-    <p>Friends:</p>
+    <p class="friends">Friends:</p>
     <p id="user_friend" hidden >{{{friend}}}</p>
 </article>
 <br>
@@ -16,14 +26,15 @@
     <label for="">
       and the year: <input type="number" id="year" value="2020">
     </label> --}}
-    <br><p>Change calendar format:</p>
+    <br><p class="calendarFormat">Change calendar format:</p>
     <label for="">
         <input type="radio" name="view" value="1" > Monthly
     </label>
     <label for="">
         <input type="radio" name="view" value="2"checked="checked"> Weekly
     </label>
- </form>
+ </form><br>
+ <button id="addEventButton" onclick="window.location.href = '/users/newEvent';">Add an Event!</button>
 <article>
     <p id="month_error" hidden >The month is not valid.</p>
     <p id="year_error" hidden >The month is not valid.</p>
@@ -40,5 +51,4 @@
         <TD class="td_title">Saturday</TD>
       </tr>
   </table>
-  <a href="/users/newEvent">Add a Private Event</a>
 <script src="../../public/js/userInfomation.js">  </script>

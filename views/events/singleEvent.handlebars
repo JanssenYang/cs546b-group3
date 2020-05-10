@@ -1,42 +1,53 @@
+<header>
+    <nav>
+    <ul id="navBar">
+        <li><a href="http://localhost:3000">Home</a></li>
+        <li><a href="http://localhost:3000/events">Public Events</a></li>
+        <li><a href="http://localhost:3000/search">Search Events/Add Friends</a></li>
+        <li><a href="http://localhost:3000/users/logout">Logout</a></li>
+    </ul>
+    </nav>
+</header>
 <h1 class="header">{{event.eventName}}</h1>
-<p class="eventInfo">Date: {{event.date}}</p>
-<p class="eventInfo">Location: {{event.location}}</p>
-<p class="eventInfo">Start Time: {{event.timeStart}}</p>
-<p class="eventInfo">End Time: {{event.timeEnd}}</p>
-<p class="eventInfo">Visibility to Friends: {{event.visibility}}</p>
-<p class="eventInfo">Participants: ({{numParticipants}})</p>
+<p class="eventInfo"><p class="singleEventInfo">Date:</p> {{event.date}}</p>
+<p class="eventInfo"><p class="singleEventInfo">Location:</p> {{event.location}}</p>
+<p class="eventInfo"><p class="singleEventInfo">Start Time:</p> {{event.timeStart}}</p>
+<p class="eventInfo"><p class="singleEventInfo">End Time:</p> {{event.timeEnd}}</p>
+<p class="eventInfo"><p class="singleEventInfo">Visibility to Friends:</p> {{event.visibility}}</p>
+<p class="eventInfo"><p class="singleEventInfo">Participants</p> ({{numParticipants}}):</p>
+<ul id="participantsList">
+    {{#each participants}}
+        <li class="participantListItem"><a href="/users/{{this.userName}}">{{this.name}} ({{this.userName}})</a></li>
+    {{/each}}
+</ul><br><br>
+<form action="/events/addComment{{event._id}}" method="POST" id="addComment">
+    <label>
+        Add Comment
+        <input class="addEventInput" name="commentText" id="commentText" type="text">
+    </label>
+    <label>
+        <button type="submit">Submit</button>
+    </label>
+</form><br>
+{{#if event.comments}}
+    <p class="singleEventInfo">Comments:</p><br><br>
+{{/if}}
+<ol id="commentsList">
+    {{#each event.comments}}
+        <li class="commentListItem"><a href="/users/{{this.username}}">{{this.username}}</a>: {{this.commentText}}</li><br><br><br>
+    {{/each}}
+</ol>
 {{#unless inEvent}}
 <form action="/events/joinEvent{{event._id}}" method="POST" id="joinPublicEvent">
     <button type="submit">Join Event</button>
 </form>
 {{else}}
 <form action="/events/leaveEvent{{event._id}}" method="POST" id="leavePublicEvent">
-    <button type="submit">leave Event</button>
-</form>
+    <button class="eventButton" type="submit">Leave Event</button>
+</form><br>
 {{/unless}}
 {{#if owner}}
 <form action="/events/deleteEvent{{event._id}}" method="POST" id="deletePublicEvent">
-    <button type="submit">Delete Event</button>
+    <button class="eventButton" type="submit">Delete Event</button>
 </form>
 {{/if}}
-<ul id="participantsList">
-    {{#each participants}}
-        <li class="participantListItem"><a href="/users/{{this.userName}}">{{this.name}} ({{this.userName}})</a></li>
-    {{/each}}
-</ul>
-<a href="/events">Back To Public Events</a>
-<form action="/events/addComment{{event._id}}" method="POST" id="addComment">
-    <label>
-        Add Comment
-        <input name="commentText" id="commentText" type="text">
-    </label>
-    <label>
-        <button type="submit">Submit</button>
-    </label>
-</form>
-<p class="eventInfo">Comments:</p>
-<ol id="commentsList">
-    {{#each event.comments}}
-        <li class="commentListItem"><a href="/users/{{this.username}}">{{this.username}}</a>: {{this.commentText}}</li>
-    {{/each}}
-</ol>
