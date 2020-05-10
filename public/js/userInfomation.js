@@ -38,6 +38,18 @@ let transFromTimeToArray=(str)=>{
     }
     return str;
 }
+setTimeout( "updateTimeAsTheNewestOne()", 0 );
+let updateTimeAsTheNewestOne=()=>{
+    // let cur = document.f.select_date.value;
+    let curDate = new Date();
+    let y = curDate.getFullYear();
+    let m = curDate.getMonth()+1;
+    let d = curDate.getDate();
+    if( m<10 ) m = '0'+m;
+    if( d<10 ) d = '0'+d;
+    // console.log(y+" "+m+" "+d);
+    document.f.select_date.value = y+'-'+m+'-'+d;
+}
 //update month and year every 2 second.
 setTimeout("updateTime()", 20);
 setInterval( "updateTime();", 2000 );
