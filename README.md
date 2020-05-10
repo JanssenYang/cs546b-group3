@@ -11,7 +11,7 @@ A scheduling application with a social media twist. Users of our app can add eve
 
 “npm start” will run our application and it will bring you to the login page. Our seed script created a user account for you: the username is “phill” and the password is “cs546”. You can also register a new user by clicking the link on the login page.
 
-**Note**: Please load our app in Chrome, as some HTML5 elements are not supported in Safari. Also, on our proposal we have a user's friends on a separate page, but instead we put their friends on their main profile page. The search page now has the ability to add friends.
+**Note**: Please load our app in Chrome, as some HTML5 elements are not supported in Safari. Also, on our proposal we have a user's friends on a separate page, but instead we put their friends on their main profile page. The search page now has the ability to add friends. Also in our proposal, we stated that on our main page the calendar will display the events name, location, and time. To avoid clutter in thr table with multiple events, we are just displaying the event name and it can be clicked on to see all the details for the event.
 
 After logging in, the app will take you to your main profile page which displays your events and friends. When you add an event, you can set its visibility "private" for only you to see, or "friends" for your friends to see when they view your profile. A friend’s name can be clicked on to view their events. Each event can be clicked on to display a page showing all of the event details and comments. There will be an option to add this event to your schedule if you want to attend. If the event clicked on is one of your personal events, you will also be able delete the event on this page. 
 
