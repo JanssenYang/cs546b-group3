@@ -1,15 +1,15 @@
+<header>
+    <nav>
+    <ul id="navBar">
+        <li><a href="http://localhost:3000">Home</a></li>
+        <li><a href="http://localhost:3000/events">Public Events</a></li>
+        <li><a href="http://localhost:3000/search">Search Events/Add Friends</a></li>
+        <li><a href="http://localhost:3000/users/logout">Logout</a></li>
+    </ul>
+    </nav>
+</header>
 <h1>Public Events</h1>
-<div id="eventsList">
-    {{#each events}}
-        <h2>Name: {{eventName}}</h2>
-        <p>Date: {{date}}</p>
-        <p>Start Time: {{timeStart}}</p>
-        <p>End Time: {{timeEnd}}</p>
-        <p>Location: {{location}}</p>
-        <a href="/events/{{_id}}">More Details</a>
-    {{/each}}
-</div>
-
+<h5>Add a public event:</h5>
 <form id="newEventForm">
     <label>
         Event Name
@@ -33,5 +33,15 @@
     </label>
     <input type="submit" value="Submit Event">
 </form>
+<div id="eventsList">
+    {{#each events}}
+        <h2>Name: {{eventName}}</h2>
+        <p>Date: {{date}}</p>
+        <p>Start Time: {{timeStart}}</p>
+        <p>End Time: {{timeEnd}}</p>
+        <p>Location: {{location}}</p>
+        <a href="/events/{{_id}}">More Details</a>
+    {{/each}}
+</div>
  <ul id="eventErrors" hidden>
  </ul> 

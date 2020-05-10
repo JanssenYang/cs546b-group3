@@ -1,14 +1,24 @@
-<h1>Welcome to your home, {{{userName}}}</h1>
+<header>
+  <nav>
+    <ul id="navBar">
+      <li><a href="http://localhost:3000">Home</a></li>
+      <li><a href="http://localhost:3000/events">Public Events</a></li>
+      <li><a href="http://localhost:3000/search">Search Events/Add Friends</a></li>
+      <li><a href="http://localhost:3000/users/logout">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+<h1>Welcome to your home, {{{userName}}}!</h1>
 <br>
 <article id="user_friendList">
-    <p>Friends:</p>
+    <p class="friends">Friends:</p>
     <p id="user_friend" hidden >{{{friend}}}</p>
 </article>
 <br>
 <p id="user_event" hidden>{{{event}}}</p>
  <form name="f">
    <label for="">
-      Please select the date: <input type="date" id="select_date" value="2020-05-05" >
+      Select a date: <input type="date" id="select_date" value="2020-05-05" >
     </label>
     {{!-- <label for="">
       Please select the month: <input type="number" id="month" value="5" >
@@ -16,14 +26,15 @@
     <label for="">
       and the year: <input type="number" id="year" value="2020">
     </label> --}}
-    <br><p>Please select a viewing</p>
+    <br><p class="calendarFormat">Change calendar format:</p>
     <label for="">
         <input type="radio" name="view" value="1" > Monthly
     </label>
     <label for="">
         <input type="radio" name="view" value="2"checked="checked"> Weekly
     </label>
- </form>
+ </form><br>
+ <button id="addEventButton" onclick="window.location.href = '/users/newEvent';">Add an Event!</button>
 <article>
     <p id="month_error" hidden >The month is not valid.</p>
     <p id="year_error" hidden >The month is not valid.</p>
@@ -31,14 +42,13 @@
 <br>
   <table id="schedule" border="1">
       <tr>
-        <td class="td_title">SUNDAY</td>
-        <TD class="td_title">MONDAY</TD>
-        <TD class="td_title">TUESDAY</TD>
-        <TD class="td_title">WEDNESDAY</TD>
-        <TD class="td_title">THURSDAY</TD>
-        <TD class="td_title">FRIDAY</TD>
-        <TD class="td_title">SATURDAY</TD>
+        <td class="td_title">Sunday</td>
+        <TD class="td_title">Monday</TD>
+        <TD class="td_title">Tuesday</TD>
+        <TD class="td_title">Wednesday</TD>
+        <TD class="td_title">Thursday</TD>
+        <TD class="td_title">Friday</TD>
+        <TD class="td_title">Saturday</TD>
       </tr>
   </table>
-  <a href="/users/newEvent">Add a Private Event</a>
 <script src="../../public/js/userInfomation.js">  </script>

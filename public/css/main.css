@@ -1,5 +1,6 @@
 table{
-    background-color: #ffeeff;
+    background-color: white;
+    border-color: rgb(29, 121, 196);
 }
 td{
     width: 150pt;
@@ -7,14 +8,18 @@ td{
 }
 
 body{
-    background-color: snow;
+    background-color: white;
     text-align: center;
 }
 
-h1{
+h1, h2{
     color: blue;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-style: italic;
+}
+
+h5{
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 button{
@@ -23,6 +28,41 @@ button{
     border: 2px solid blue;
     transition-duration: 0.4s;
     border-radius: 25px;
+    height: 100%;
+    width: 5%;
+    font-size: 13px;
+}
+
+#addEventButton{
+    background-color: white;
+    color:blue;
+    border: 2px solid blue;
+    transition-duration: 0.4s;
+    border-radius: 25px;
+    width: 8%;
+    height: 100%;
+    font-size: 13px;
+}
+
+#addEventButton:hover{
+    background-color: blue;
+    color: white;
+}
+
+.eventButton{
+    background-color: white;
+    color:blue;
+    border: 2px solid blue;
+    transition-duration: 0.4s;
+    border-radius: 25px;
+    width: 7%;
+    height: 100%;
+    font-size: 13px;
+}
+
+.eventButton:hover{
+    background-color: blue;
+    color: white;
 }
   
 button:hover{
@@ -30,25 +70,76 @@ button:hover{
     color: white;
 }
 
-label{
+label, .friends, .calendarFormat, .td_title{
     color: blue;
     font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+a{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+a:link{
+    color: blue;
+}
+
+a:visited{
+    color: blue;
+}
+
+a:hover{
+    color: red;
 }
 
 .td_title{
     height: 20pt;
 }
 
-.login{
+.error{
+    color: red;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+}
+
+.login, .register{
   color: black;
   width: 12rem;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: bold;
   height: 17px;
+  border-radius: 5px;
+  border-right-color: gray;
+  border-bottom-color: gray;
+}
+
+#searchInput, .addEventInput{
+  color: black;
+  width: 8rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  height: 17px;
+  border-radius: 5px;
+  border-right-color: gray;
+  border-bottom-color: gray;
+}
+
+.eventType{
+  color: black;
+  width: 16rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  height: 17px;
+  border-radius: 5px;
+  border-right-color: gray;
+  border-bottom-color: gray;
+}
+
+#errorInfo{
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 #footer{
-    color: blue;
+  color: blue;
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
   font-style: italic;
@@ -57,8 +148,14 @@ label{
   position: fixed;
 }
 
+.singleEventInfo{
+  color: blue;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  display: inline;
+}
+
 .tableData{
-    text-align: left;
+    text-align: center;
 }
 
 .tableData a{
@@ -74,18 +171,29 @@ label{
     color: red;
     text-decoration: underline;
 }
-header{
-    height: 90px;
-    background-color: #123456;
-}
 
 nav{
+    height: 22px;
+    background-color: lightgray;
+}
+
+.participantListItem{
+    float: left;
+    width: 200px;
     height: 30px;
-    background-color: beige;
 }
 
 li{
     float: left;
-    width: 150px;
+    width: 346px;
     height: 30px;
+}
+
+#navBar{
+    list-style-type: none;
+}
+
+ul, ol{
+    display: table;
+    margin: 0 auto;
 }

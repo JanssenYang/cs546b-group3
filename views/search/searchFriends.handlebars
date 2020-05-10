@@ -1,18 +1,30 @@
+<header>
+    <nav>
+    <ul id="navBar">
+        <li><a href="http://localhost:3000">Home</a></li>
+        <li><a href="http://localhost:3000/events">Public Events</a></li>
+        <li><a href="http://localhost:3000/search">Search Events/Add Friends</a></li>
+        <li><a href="http://localhost:3000/users/logout">Logout</a></li>
+    </ul>
+    </nav>
+</header>
 <h1>Search Friends</h1>
 <main>
     <form action="/search/searchFriends" method="post" id = "searchForm">
+    <label for="searchParameter">Search Friend By:</label><br>
         <select id = 'searchParameter' name = 'searchParameter'>
             <option value="userName">Username</option>
             <option value="email">Email</option>
             <option value="firstName">First name</option>
             <option value="lastName">Last name</option>
-        </select>
+        </select><br><br>
+        <label for="searchInput">Enter Friend Info:</label><br>
         <input type="text" id="searchInput" name="searchInput"><br><br>
         <input type="submit" value="Submit">
     </form>
     <br>
-    <a href = '/search/'>Search Events</a><br>
-    <a href = '/search/addFriends'>Add friends</a>
+    <a href = '/search/'>Search Events</a><br><br>
+    <a href = '/search/addFriends'>Add Friends</a>
 </main>
 
 {{#if hasErrors}}
