@@ -68,6 +68,15 @@ app.use("/home", (req, res, next) =>{
 	}
 });
 
+app.use("/users/newEvent", (req, res, next) => {
+	if(!req.session.user){
+		res.redirect("/");
+    }
+    else{
+		next();
+	}
+});
+
 configRoutes(app);
 
 app.listen(3000, () => {

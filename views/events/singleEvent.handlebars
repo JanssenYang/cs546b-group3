@@ -37,14 +37,16 @@
         <li class="commentListItem"><a href="/users/{{this.username}}">{{this.username}}</a>: {{this.commentText}}</li><br><br><br>
     {{/each}}
 </ol>
-{{#unless inEvent}}
-<form action="/events/joinEvent{{event._id}}" method="POST" id="joinPublicEvent">
-    <button type="submit">Join Event</button>
-</form>
-{{else}}
-<form action="/events/leaveEvent{{event._id}}" method="POST" id="leavePublicEvent">
-    <button class="eventButton" type="submit">Leave Event</button>
-</form><br>
+{{#unless isPrivate}}
+    {{#unless inEvent}}
+    <form action="/events/joinEvent{{event._id}}" method="POST" id="joinPublicEvent">
+        <button type="submit">Join Event</button>
+    </form>
+    {{else}}
+    <form action="/events/leaveEvent{{event._id}}" method="POST" id="leavePublicEvent">
+        <button class="eventButton" type="submit">Leave Event</button>
+    </form><br>
+    {{/unless}}
 {{/unless}}
 {{#if owner}}
 <form action="/events/deleteEvent{{event._id}}" method="POST" id="deletePublicEvent">
