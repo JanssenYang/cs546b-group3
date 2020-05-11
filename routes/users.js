@@ -153,14 +153,14 @@ router.get('/:userName', async (req, res) => {
     }
     try{
         //Possible for this user to not exist, will throw and be caught below
-        const getUser = await userData.getUserByUserName(req.params.userName);
+        const getUser = await userData.getUserByUserName(xss(req.params.userName));
 
         //If the user is logged in and the userName is not their own, check to see
-        if(req.params.userName === req.session.user.userName){
+        if(xss(req.params.userName) === req.session.user.userName){
             res.redirect('/');return;
         }
         //if the user is friend's with that person. If not, they can't view their profile.
-        if(req.params.userName !== req.session.user.userName){
+        if(xss(req.params.userName) !== req.session.user.userName){
             currUser = false;
             const friendsList = req.session.user.friends;
             let found = false;
@@ -211,18 +211,18 @@ router.get('/:userName', async (req, res) => {
             eventNameAndTime.push(tempForm);
         }
         let obj={
-            title: `${req.params.userName}'s Account`,
-            userName: req.params.userName,
+            title: `${xss(req.params.userName)}'s Account`,
+            userName: xss(req.params.userName),
             friend: JSON.stringify(friendNameAndLink),
             event: JSON.stringify(eventNameAndTime)
         }
         // console.log(obj);
         res.render('users/profile', {
-            title: `${req.params.userName}'s Account`,
-            userName: req.params.userName,
-            friend: JSON.stringify(friendNameAndLink),
-            event: JSON.stringify(eventNameAndTime),
-            currUser: currUser
+            title: `${xss(req.params.userName)}'s Account`,
+            userName: xss(req.params.userName),
+            friend: xss(JSON.stringify(friendNameAndLink)),
+            event: xss(JSON.stringify(eventNameAndTime)),
+            currUser: xss(currUser)
         })
     }catch(e){
         res.status(404).render("layouts/error", {
