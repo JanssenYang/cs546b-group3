@@ -13,7 +13,7 @@ if(article_friend){
     for( let i=0; i<friend.length; i++ ){
         let a = document.createElement('a');
         a.innerHTML = friend[i].userName;
-        a.href = "http://localhost:3000/users/"+friend[i].userName;
+        a.href = "/users/"+friend[i].userName;
         article_friend.appendChild(a);
     }
 }
@@ -52,7 +52,7 @@ let updateTimeAsTheNewestOne=()=>{
 }
 //update month and year every 2 second.
 setTimeout("updateTime()", 20);
-setInterval( "updateTime();", 2000 );
+setInterval( "updateTime();", 1000 );
 // setTimeout( "updateTime();",200 );//for test
 let cleanTable=()=>{
     let rowLength = table.rows.length;
@@ -131,7 +131,7 @@ let updateTimeWeekly=()=>{
                         //eventName
                         let alink = document.createElement('a');
                         alink.innerHTML = event[j].eventName;
-                        alink.href = "http://localhost:3000/events/"+event[j].eventId;
+                        alink.href = "/events/"+event[j].eventId;
                         let br = document.createElement('br');
                         text.appendChild(alink);
                         text.appendChild(br);
@@ -144,7 +144,7 @@ let updateTimeWeekly=()=>{
                         let p1 = document.createElement('a');
                         p1.hidden = true;
                         p1.innerHTML = ""+event[j].vis;
-                        p1.href = "http://localhost:3000/home/"+event[j].eventId;
+                        p1.href = "/home/"+event[j].eventId;
                         text.appendChild(p1);
 
                         // let vis = document.createElement('button');
@@ -205,7 +205,7 @@ let updateTimeMonthly=()=>{
                         text.className = "tableData";
                         let alink = document.createElement('a');
                         alink.innerHTML = event_thisMonth[i].eventName;
-                        alink.href = "http://localhost:3000/events/"+event_thisMonth[i].eventId; //cant access unless open in new tab
+                        alink.href = "/events/"+event_thisMonth[i].eventId; //cant access unless open in new tab
                         let br = document.createElement('br');
                         text.appendChild(alink);
                         text.appendChild(br);
@@ -219,7 +219,7 @@ let updateTimeMonthly=()=>{
                         let p1 = document.createElement('a');
                         p1.hidden = true;
                         p1.innerHTML = ""+event_thisMonth[i].vis;
-                        p1.href = "http://localhost:3000/home/"+event_thisMonth[i].eventId;
+                        p1.href = "/home/"+event_thisMonth[i].eventId;
                         text.appendChild(p1);
 
                         data.appendChild(text);
