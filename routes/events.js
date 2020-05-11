@@ -124,8 +124,13 @@ router.post("/leaveEvent:id", async(req, res) => {
 
 router.post("/deleteEvent:id", async(req, res) => {
     try{
-        await eventData.removeEvent(xss(req.params.id));
-        res.redirect("/events");
+        const deletedEvent = await eventData.removeEvent(xss(req.params.id));
+        if(deletedEvent.visibility === "public"){
+            res.redirect("/events");
+        }
+        else{
+            res.redirect("/home");
+        }
         return;
     }
     catch(e){
