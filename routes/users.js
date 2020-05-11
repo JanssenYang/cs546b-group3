@@ -68,11 +68,8 @@ router.post('/register', async (req, res) => {
         expiresAt.setHours(expiresAt.getHours() + 1);
         req.session.cookie.expires = expiresAt;
 
-        res.render('users/profile', {
-            title: `${xss(userInfo.userName)}'s Account`,
-            userName: xss(userInfo.userName)
-        })
-        return
+        res.redirect("/home");
+        return;
     } catch (e) {
         res.render('layouts/register', {
             title: 'Create an account',
