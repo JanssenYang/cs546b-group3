@@ -69,10 +69,6 @@ router.post('/register', async (req, res) => {
         req.session.cookie.expires = expiresAt;
 
         res.redirect("/home");
-        // res.render('users/profile', {
-        //     title: `${xss(userInfo.userName)}'s Account`,
-        //     userName: xss(userInfo.userName)
-        // })
         return;
     } catch (e) {
         res.render('layouts/register', {
