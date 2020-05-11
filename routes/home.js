@@ -43,8 +43,8 @@ router.get('/', async (req, res)=>{
 
 
         let obj={
-            title: `${xss(req.params.userName)}'s Account`,
-            userName: xss(req.params.userName),
+            title: `${xss(user.userName)}'s Account`,
+            userName: xss(user.userName),
             friend: xss(JSON.stringify(friendNameAndLink)),
             event: xss(JSON.stringify(eventNameAndTime)),
             currUser: xss(currUser)
