@@ -35,6 +35,7 @@ router.get('/:id', async (req, res) => {
         }
         res.render('events/singleEvent', 
             {
+                title: event.eventName,
                 event: event,
                 numParticipants: participants.length,
                 participants: participantObjects,
