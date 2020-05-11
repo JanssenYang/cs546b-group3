@@ -43,11 +43,11 @@ router.get('/', async (req, res)=>{
 
 
         let obj={
-            title: `${user.userName}'s Home`,
-            userName: user.userName,
-            friend: JSON.stringify(friendNameAndLink),
-            event: JSON.stringify(eventNameAndTime),
-            currUser: currUser
+            title: `${xss(req.params.userName)}'s Account`,
+            userName: xss(req.params.userName),
+            friend: xss(JSON.stringify(friendNameAndLink)),
+            event: xss(JSON.stringify(eventNameAndTime)),
+            currUser: xss(currUser)
         };
         res.render('home/normal', obj);
     }catch(e){
@@ -63,7 +63,7 @@ router.get("/:id", async(req, res)=>{
         return;
     }
     try{
-        const eventId = req.params.id;
+        const eventId = xss(req.params.id);
         const user = req.session.user;
         // console.log( eventId );
         // console.log(user);
