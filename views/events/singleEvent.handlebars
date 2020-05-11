@@ -41,7 +41,7 @@
     {{#unless inEvent}}
     <form action="/events/joinEvent{{event._id}}" method="POST" id="joinPublicEvent">
         <button type="submit">Join Event</button>
-    </form>
+    </form><br>
     {{else}}
     <form action="/events/leaveEvent{{event._id}}" method="POST" id="leavePublicEvent">
         <button class="eventButton" type="submit">Leave Event</button>
