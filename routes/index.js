@@ -22,7 +22,9 @@ const constructorMethod = app => {
     }
 })
     app.use('*', (req, res) => {
-        res.sendStatus(404);
+        res.status(404).render("layouts/error", {
+            title: "404 Error: Not Found"
+        });
     })
 }
 
