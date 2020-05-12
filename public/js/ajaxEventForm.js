@@ -16,7 +16,7 @@
         let end = newEnd.val();        
         let anyErrors = false;
         eventErrors.empty();
-        if(!date){
+        if(!name){
             anyErrors = true;
             eventErrors.show();
             eventErrors.append("<li>You must input a name</li>");
