@@ -1,20 +1,20 @@
 <header>
     <nav>
     <ul id="navBar">
-        <li><a href="http://localhost:3000">Home</a></li>
-        <li><a href="http://localhost:3000/events">Public Events</a></li>
-        <li><a href="http://localhost:3000/search">Search Events/Add Friends</a></li>
-        <li><a href="http://localhost:3000/users/logout">Logout</a></li>
+        <li class="navBarItem"><a href="http://localhost:3000">Home</a></li>
+        <li class="navBarItem"><a href="http://localhost:3000/events">Public Events</a></li>
+        <li class="navBarItem"><a href="http://localhost:3000/search">Search Events/Add Friends</a></li>
+        <li class="navBarItem"><a href="http://localhost:3000/users/logout">Logout</a></li>
     </ul>
     </nav>
 </header>
 <h1 class="header">{{event.eventName}}</h1>
-<p class="eventInfo"><p class="singleEventInfo">Date:</p> {{event.date}}</p>
-<p class="eventInfo"><p class="singleEventInfo">Location:</p> {{event.location}}</p>
-<p class="eventInfo"><p class="singleEventInfo">Start Time:</p> {{event.timeStart}}</p>
-<p class="eventInfo"><p class="singleEventInfo">End Time:</p> {{event.timeEnd}}</p>
-<p class="eventInfo"><p class="singleEventInfo">Visibility to Friends:</p> {{event.visibility}}</p>
-<p class="eventInfo"><p class="singleEventInfo">Participants</p> ({{numParticipants}}):</p>
+<p class="eventInfo"><span class="singleEventInfo">Date:</span> {{event.date}}</p>
+<p class="eventInfo"><span class="singleEventInfo">Location:</span> {{event.location}}</p>
+<p class="eventInfo"><span class="singleEventInfo">Start Time:</span> {{event.timeStart}}</p>
+<p class="eventInfo"><span class="singleEventInfo">End Time:</span> {{event.timeEnd}}</p>
+<p class="eventInfo"><span class="singleEventInfo">Visibility to Friends:</span> {{event.visibility}}</p>
+<p class="eventInfo"><span class="singleEventInfo">Participants</span> ({{numParticipants}}):</p>
 <ul id="participantsList">
     {{#each participants}}
         <li class="participantListItem"><a href="/users/{{this.userName}}">{{this.name}} ({{this.userName}})</a></li>
@@ -34,7 +34,7 @@
 {{/if}}
 <ol id="commentsList">
     {{#each event.comments}}
-        <li class="commentListItem"><a href="/users/{{this.username}}">{{this.username}}</a>: {{this.commentText}}</li><br><br><br>
+        <li class="commentListItem"><a href="/users/{{this.username}}">{{this.username}}</a>: {{this.commentText}}</li>
     {{/each}}
 </ol>
 {{#unless isPrivate}}

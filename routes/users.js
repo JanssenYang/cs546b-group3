@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs");
 const xss = require("xss");
 
 router.get("/newEvent", async(req, res) => {
-    res.render("users/privateEventForm", {anyErrors: false});
+    res.render("users/privateEventForm", {title: "Add a New Event", anyErrors: false});
 });
 
 router.get('/new', async (req, res) => {
