@@ -117,6 +117,10 @@ a:hover{
   border-bottom-color: gray;
 }
 
+.commentListItem{
+    padding-right: 0px;
+}
+
 #searchInput, .addEventInput{
   color: black;
   width: 8rem;
@@ -188,7 +192,17 @@ nav{
     height: 30px;
 }
 
+.commentListItem{
+    padding-bottom: 10px;
+}
+
 li{
+    float: center;
+    width: 346px;
+    height: 30px;
+}
+
+.navBarItem{
     float: left;
     width: 346px;
     height: 30px;

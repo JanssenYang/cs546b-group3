@@ -66,6 +66,7 @@ router.get("/", async(req, res) => {
             empty = true;
         }
         res.render("events/publicEvents",{
+            title: "Public Events",
             events: publicEvents,
             empty: empty
         });
