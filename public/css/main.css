@@ -1,10 +1,14 @@
 table{
     background-color: white;
     border-color: rgb(29, 121, 196);
+    border-collapse: separate;
+    border:1px;
+    border:solid rgb(29, 121, 196) 1px;
 }
 td{
     width: 150pt;
     height: 50pt;
+    border:solid rgb(29, 121, 196) 1px;
 }
 
 body{

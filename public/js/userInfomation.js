@@ -135,17 +135,17 @@ let updateTimeWeekly=()=>{
                         let br = document.createElement('br');
                         text.appendChild(alink);
                         text.appendChild(br);
-                        //event location
-                        let p = document.createElement('p');
-                        p.hidden = true;
-                        p.innerHTML = "location:"+event[j].eventLocation;
-                        text.appendChild(p);
-                        // set visibility
-                        let p1 = document.createElement('a');
-                        p1.hidden = true;
-                        p1.innerHTML = ""+event[j].vis;
-                        p1.href = "/home/"+event[j].eventId;
-                        text.appendChild(p1);
+                        // //event location
+                        // let p = document.createElement('p');
+                        // p.hidden = true;
+                        // p.innerHTML = "location:"+event[j].eventLocation;
+                        // text.appendChild(p);
+                        // // set visibility
+                        // let p1 = document.createElement('a');
+                        // p1.hidden = true;
+                        // p1.innerHTML = ""+event[j].vis;
+                        // p1.href = "/home/"+event[j].eventId;
+                        // text.appendChild(p1);
 
                         // let vis = document.createElement('button');
                         // // vis.setAttribute("summit");
@@ -210,17 +210,17 @@ let updateTimeMonthly=()=>{
                         text.appendChild(alink);
                         text.appendChild(br);
                         
-                        //event location
-                        let p = document.createElement('p');
-                        p.innerHTML = "location:"+event_thisMonth[i].eventLocation;
-                        p.hidden = true;
-                        text.appendChild(p);
-                        // set visibility
-                        let p1 = document.createElement('a');
-                        p1.hidden = true;
-                        p1.innerHTML = ""+event_thisMonth[i].vis;
-                        p1.href = "/home/"+event_thisMonth[i].eventId;
-                        text.appendChild(p1);
+                        // //event location
+                        // let p = document.createElement('p');
+                        // p.innerHTML = "location:"+event_thisMonth[i].eventLocation;
+                        // p.hidden = true;
+                        // text.appendChild(p);
+                        // // set visibility
+                        // let p1 = document.createElement('a');
+                        // p1.hidden = true;
+                        // p1.innerHTML = ""+event_thisMonth[i].vis;
+                        // p1.href = "/home/"+event_thisMonth[i].eventId;
+                        // text.appendChild(p1);
 
                         data.appendChild(text);
                     }
