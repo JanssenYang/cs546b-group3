@@ -57,32 +57,32 @@ router.get('/', async (req, res)=>{
         });
     }
 });
-router.get("/:id", async(req, res)=>{
-    if(!req.session.user){
-        res.status(403).render("layouts/error", {title: "403 Error: Not Authenticated", error: "Please login to view your profile."});
-        return;
-    }
-    try{
-        const eventId = xss(req.params.id);
-        const user = req.session.user;
-        // console.log( eventId );
-        // console.log(user);
-        let mark=false;
-        const event = await eventData.getEvent(eventId);
-        // console.log(event);
-        if( event.eventHostID === user._id.toString() ) mark = true;
-        if( !mark ) res.redirect('/');
-        // console.log(mark)
-        let a = await eventData.changeVisibility(eventId);
-        // console.log(a);
-        res.redirect('/');
-    }
-    catch(e){
-        res.status(500).render("layouts/error", {
-            title: "500 Error: Interval Error",
-            error: e 
-        });
-    }
-});
+// router.get("/:id", async(req, res)=>{
+//     if(!req.session.user){
+//         res.status(403).render("layouts/error", {title: "403 Error: Not Authenticated", error: "Please login to view your profile."});
+//         return;
+//     }
+//     try{
+//         const eventId = xss(req.params.id);
+//         const user = req.session.user;
+//         // console.log( eventId );
+//         // console.log(user);
+//         let mark=false;
+//         const event = await eventData.getEvent(eventId);
+//         // console.log(event);
+//         if( event.eventHostID === user._id.toString() ) mark = true;
+//         if( !mark ) res.redirect('/');
+//         // console.log(mark)
+//         let a = await eventData.changeVisibility(eventId);
+//         // console.log(a);
+//         res.redirect('/');
+//     }
+//     catch(e){
+//         res.status(500).render("layouts/error", {
+//             title: "500 Error: Interval Error",
+//             error: e 
+//         });
+//     }
+// });
 
 module.exports = router;
