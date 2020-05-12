@@ -2,25 +2,35 @@ const article_friend = document.getElementById("user_friendList");
 //data in string
 const user_friend = document.getElementById("user_friend");
 const user_event = document.getElementById("user_event");
+let event=[], friend=[];
+if( user_friend && user_event ){
+    friend = JSON.parse(user_friend.innerHTML);
+    event = JSON.parse(user_event.innerHTML);
+    // console.log(event);
 
-// console.log(typeof user_friend.innerHTML);
-// console.log(user_friend.innerHTML);
-let friend = JSON.parse(user_friend.innerHTML);
-let event = JSON.parse(user_event.innerHTML);
-// console.log(event);
-
-if(article_friend){
-    for( let i=0; i<friend.length; i++ ){
-        let a = document.createElement('a');
-        a.innerHTML = friend[i].userName;
-        a.href = "/users/"+friend[i].userName;
-        article_friend.appendChild(a);
+    if(article_friend){
+        for( let i=0; i<friend.length; i++ ){
+            let a = document.createElement('a');
+            a.innerHTML = friend[i].userName;
+            a.href = "/users/"+friend[i].userName;
+            article_friend.appendChild(a);
+        }
     }
 }
 
+
+
 const table = document.getElementById("schedule");
+
 let month=0, year=0,day=0;
-setTimeout("transEventDateToArray()",10);
+if( table ){
+    setTimeout( "updateTimeAsTheNewestOne()", 0 );
+    setTimeout("transEventDateToArray()",10);
+    //update month and year every 2 second.
+    setTimeout("updateTime()", 20);
+    setInterval( "updateTime();", 1000 );
+    // setTimeout( "updateTime();",200 );//for test
+}
 let transEventDateToArray=()=>{
     for(let i=0; i<event.length; i++){
         let str = event[i].eventdate;
@@ -38,7 +48,7 @@ let transFromTimeToArray=(str)=>{
     }
     return str;
 }
-setTimeout( "updateTimeAsTheNewestOne()", 0 );
+
 let updateTimeAsTheNewestOne=()=>{
     // let cur = document.f.select_date.value;
     let curDate = new Date();
@@ -50,10 +60,7 @@ let updateTimeAsTheNewestOne=()=>{
     // console.log(y+" "+m+" "+d);
     document.f.select_date.value = y+'-'+m+'-'+d;
 }
-//update month and year every 2 second.
-setTimeout("updateTime()", 20);
-setInterval( "updateTime();", 1000 );
-// setTimeout( "updateTime();",200 );//for test
+
 let cleanTable=()=>{
     let rowLength = table.rows.length;
     for( let i=1; i<rowLength; i++ ){
@@ -61,6 +68,7 @@ let cleanTable=()=>{
     }
 }
 const view = document.getElementsByName('view');
+if(!view) view = [];
 let updateTime=()=>{
     // month = document.f.month.value;
     // year = document.f.year.value;
