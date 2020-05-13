@@ -291,9 +291,11 @@ router.post('/addFriends', async (req, res) => {
 // Get here by clicking on someone's username after searching in add friends
 router.get('/addFriends/:userName', async (req, res) => {
     try {
-        const addFriendAttempt = await userData.addFriend(xss(req.session.user.userName), xss(req.params.userName))
         const getNewFriendID = await userData.getUserByUserName(xss(req.params.userName))
-        req.session.user.friends.push(getNewFriendID._id.toString())
+        if (getNewFriendID._id.toString() !== req.session.user._id) {
+            const addFriendAttempt = await userData.addFriend(xss(req.session.user.userName), xss(req.params.userName))
+            req.session.user.friends.push(getNewFriendID._id.toString())
+        }
     } catch (e) {
         res.render('search/addFriends', {
             title: 'Add Friends',
