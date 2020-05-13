@@ -7,9 +7,11 @@ Github Link: https://github.com/JanssenYang/cs546b-group3
 
 A scheduling application with a social media twist. Users of our app can add events to their schedules, as well as add friends. When friends with someone, the user will be able to view that friend’s public events, as well as comment on each other’s events. If a user would like to attend a friend’s event, there will be a button for the user to press that will add the event to their personal schedule. When an event is clicked on, it will show all details about the event, including comments. The public events page is a community page for our app, where any user can view/add events, comment on events, or even add these public events to their personal schedule. Comments will be visible to all users attending the same event.
 
+"npm install" will install all dependencies needed and will create package-lock.json and the node_modules folder.
+
 “npm run seed” can be run to populate the database. We’ve added multiple users and friends, personal events for each user, as well as public events on the public events page. There are also comments on some of the events. It will take a few moments to run due to hashing passwords.
 
-“npm start” will run our application and it will bring you to the login page. Our seed script created a user account for you: the username is “phill” and the password is “cs546”. You can also register a new user by clicking the link on the login page.
+“npm start” will run our application (on http://localhost:3000) and it will bring you to the login page. Our seed script created a user account for you: the username is “phill” and the password is “cs546”. You can also register a new user by clicking the link on the login page.
 
 **Note**: Please load our app in Chrome, as some HTML5 elements are not supported in Safari. Also, on our proposal we have a user's friends on a separate page, but instead we put their friends on their main profile page. The search page now has the ability to add friends. Also in our proposal, we stated that on our main page the calendar will display the events name, location, and time. To avoid clutter in thr table with multiple events, we are just displaying the event name and it can be clicked on to see all the details for the event.
 
