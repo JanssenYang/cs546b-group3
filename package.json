@@ -21,7 +21,7 @@
   "dependencies": {
     "@khanacademy/tota11y": "^0.2.0",
     "bcryptjs": "^2.4.3",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "express-handlebars": "^4.0.3",
     "express-session": "^1.17.1",
     "handlebars": "^4.7.6",
